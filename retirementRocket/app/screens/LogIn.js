@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 
-export default function SecondScreen({ navigation, route }) {
+export default function LogIn({ navigation, route }) {
   let language = route.params.language;
   let greeting = language === "french" ? "Bonjour" : "Hello";
   return (
