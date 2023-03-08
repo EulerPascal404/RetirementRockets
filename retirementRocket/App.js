@@ -1,8 +1,8 @@
-import HomeScreen from "./app/screens/HomeScreen.js";
-import SecondScreen from "./app/screens/SecondScreen.js";
-import ThirdScreen from "./app/screens/ThirdScreen.js";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from './app/screens/HomeScreen';
+import SecondScreen from './app/screens/SecondScreen';
+import ThirdScreen from './app/screens/ThirdScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
