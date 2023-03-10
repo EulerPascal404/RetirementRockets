@@ -7,18 +7,21 @@ export default function LogIn({ navigation, route }) {
   let greeting = language === "french" ? "Bonjour" : "Hello";
   return (
     <View style={styles.container}>
-      <Text>{greeting}</Text>
+      <Text>{"El Primo Finance"}</Text>
+      <Text>{"Hi there! Nice to see you again"}</Text>
+      <Text>{"Username"}</Text>
+   
+      <Text>{"Password"}</Text>
+  
       <Button 
-        title='Go to Third Screen'
+        title='Login'
+        //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
         onPress={() => navigation.push("Third")}
       />
       <Button 
-        title='Go to Third Screen with Replace'
-        onPress={() => {
-          navigation.dispatch(
-            StackActions.replace("Third")
-          );
-        }}
+        title='Sign Up'
+        //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
+        onPress={() => navigation.push("SignUp")}
       />
       <StatusBar style="auto" />
     </View>
@@ -27,9 +30,10 @@ export default function LogIn({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+      borderColor: "gray",
+      width: "100%",
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 10,
+    },
 });

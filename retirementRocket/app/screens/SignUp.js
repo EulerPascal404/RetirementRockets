@@ -6,12 +6,12 @@ export default function SignUp({ navigation }) {
     <View style={styles.container}>
       <Button 
         title="Navigate to second screen with french"
-        onPress={() => navigation.navigate("Second", { language: "french" })}
+        onPress={() => navigation.navigate('LogIn', { screen: 'LogIn' })}
+        //onPress={() => navigation.navigate('LogIn')}
       />
       <Button 
         title="Navigate to second screen with english"
-        onPress={() => navigation.navigate("Second", { language: "english" })}
-      />
+        onPress={() => navigation.push("LogIn")}      />
       <StatusBar style="auto" />
     </View>
   );

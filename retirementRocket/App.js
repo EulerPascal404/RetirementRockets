@@ -9,13 +9,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        
         <Stack.Screen 
           name="SignUp"
           component={SignUp}
         />
         <Stack.Screen 
-          name="LogIn"
-          component={LogIn}
+        name="LogIn"
+        component={LogIn}
+          
         />
       
       </Stack.Navigator>
