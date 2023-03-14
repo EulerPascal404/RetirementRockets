@@ -7,7 +7,7 @@ export default function LogIn({ navigation, route }) {
     <View style={styles.container}>
       <Text>{"El Primo Finance"}</Text>
       <Text>{"Hi there! Nice to see you again"}</Text>
-      <Text>{"Username"}</Text>
+      <Text>{"Email"}</Text>
       <TextInput
         style={{height: 40}}
         placeholder="Enter Username"
@@ -20,7 +20,7 @@ export default function LogIn({ navigation, route }) {
       <Button 
         title='Login'
         //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
-        onPress={() => navigation.push("Third")}
+        //onPress={() => navigation.push("Third")}
       />
       <Button 
         title='Sign Up'
