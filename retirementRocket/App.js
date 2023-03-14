@@ -9,18 +9,18 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen 
-        name="LogIn"
-        component={LogIn}
-          
+        
+        <Stack.Screen 
+          name="LogIn"
+          component={LogIn}
         />
-      
+        
         <Stack.Screen 
           name="SignUp"
           component={SignUp}
         />
-        
+      
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  );r
 }

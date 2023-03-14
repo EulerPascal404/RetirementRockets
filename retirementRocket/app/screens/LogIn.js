@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 
 export default function LogIn({ navigation, route }) {
-  let language = route.params.language;
-  let greeting = language === "french" ? "Bonjour" : "Hello";
   return (
     <View style={styles.container}>
       <Text>{"El Primo Finance"}</Text>
