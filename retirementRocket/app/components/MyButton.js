@@ -1,8 +1,9 @@
-import React from 'react';
+ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 function MyButton({title, onPress, backColor,}) {
    return (
       <TouchableOpacity
+         title = {title}
          onPress={onPress}
          style={[styles.rectangle, {backgroundColor: backColor}]}>
        <Text style={styles.text}>{title}</Text>

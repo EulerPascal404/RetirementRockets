@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 
+import MyButton from '../components/MyButton';
+import colors from '../config/colors';
+
 export default function LogIn({ navigation, route }) {
   return (
     <View style={styles.container}>
@@ -17,16 +20,18 @@ export default function LogIn({ navigation, route }) {
         style={{height: 40}}
         placeholder="Enter Password"
       />
-      <Button 
+      <MyButton 
         title='Login'
         //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
         //onPress={() => navigation.push("Third")}
+        backColor={colors.purple}
       />
-      <Button 
+      <MyButton 
         title='Sign Up'
         //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
         onPress={() => navigation.push("SignUp")}
-      />
+        backColor={colors.purple}
+        />
       <StatusBar style="auto" />
     </View>
   );

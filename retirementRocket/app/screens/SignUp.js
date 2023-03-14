@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 
+import MyButton from '../components/MyButton';
+import colors from '../config/colors';
+
 export default function SignUp({ navigation }) {
   return (
     <View style={styles.container}>
@@ -15,9 +18,10 @@ export default function SignUp({ navigation }) {
         style={{height: 40}}
         placeholder="Enter Password"
       />
-      <Button 
+      <MyButton 
         title="Have an account? Sign In"
         onPress={() => navigation.navigate('LogIn', { screen: 'LogIn' })}
+        backColor={colors.purple}
       />
     
       <StatusBar style="auto" />
