@@ -1,0 +1,7 @@
+flask
+numpy
+pandas
+matplotlib
+bs4
+flask-restful
+flask_cors
