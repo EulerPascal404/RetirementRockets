@@ -1,29 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
-
-import MyButton from '../components/MyButton';
-import colors from '../config/colors';
+import { StyleSheet, Button, View } from 'react-native';
 
 export default function SignUp({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>{"Sign Up"}</Text>
-      <Text>{"Email"}</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Your email adress"
-      />
-      <Text>{"Password"}</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Enter Password"
-      />
-      <MyButton 
-        title="Have an account? Sign In"
+      <Button 
+        title="Navigate to second screen with french"
         onPress={() => navigation.navigate('LogIn', { screen: 'LogIn' })}
-        backColor={colors.purple}
       />
-    
+      <Button 
+        title="Navigate to second screen with english"
+        onPress={() => navigation.push("LogIn")}      />
       <StatusBar style="auto" />
     </View>
   );

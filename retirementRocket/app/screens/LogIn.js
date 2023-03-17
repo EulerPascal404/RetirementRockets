@@ -23,7 +23,7 @@ export default function LogIn({ navigation, route }) {
       <MyButton 
         title='Login'
         //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
-        //onPress={() => navigation.push("Third")}
+        onPress={() => navigation.push("Home")}
         backColor={colors.purple}
       />
       <MyButton 
