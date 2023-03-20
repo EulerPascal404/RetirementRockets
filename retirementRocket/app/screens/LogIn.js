@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, CommonActions } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 
 import MyButton from '../components/MyButton';
@@ -23,7 +23,18 @@ export default function LogIn({ navigation, route }) {
       <MyButton 
         title='Login'
         //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
-        onPress={() => navigation.push("Home")}
+        onPress={() => navigation.push("HomeDrawer")
+        // onPress={() =>
+        //   navigation.dispatch(
+        //     CommonActions.navigate({
+        //       name: 'Home',
+          
+        //     })
+        //   )
+        // }
+      
+      } 
+
         backColor={colors.purple}
       />
       <MyButton 
