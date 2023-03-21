@@ -20,9 +20,20 @@ export default function SignUp({ navigation }) {
       />
       <MyButton 
         title="Have an account? Sign In"
+        backColor={colors.purple}
       />
     
       <StatusBar style="auto" />
     </View>
   )
 };
+
+const styles = StyleSheet.create({
+  container: {
+      borderColor: "gray",
+      width: "100%",
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 10,
+    },
+});
