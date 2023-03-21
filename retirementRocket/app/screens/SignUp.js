@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 
 import MyButton from '../components/MyButton';
+import Separator from '../components/Separator';
 import colors from '../config/colors';
 
 export default function SignUp({ navigation }) {
@@ -18,9 +19,21 @@ export default function SignUp({ navigation }) {
         style={{height: 40}}
         placeholder="Enter Password"
       />
+      <Separator
+        color = "colors.secondary"
+      />
+      <Text>{"I agree to the Terms of Services and Privacy Policy."}</Text>
+      <MyButton
+        title= "Continue"
+        backColor={colors.purple}
+        onPress={() => navigation.push("HomeDrawer")}
+
+      />
       <MyButton 
         title="Have an account? Sign In"
         backColor={colors.purple}
+        onPress={() => navigation.push("LogIn")}
+
       />
     
       <StatusBar style="auto" />

@@ -11,7 +11,7 @@ function Separator({color}) {
     itemSeparator: {
     width: '100%',
     height: 2,
-    backgroundColor: 'gray',
+    backgroundColor: 'black',
     marginBottom: 10,
   },
 });
