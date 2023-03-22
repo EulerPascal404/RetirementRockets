@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 
-function Separator({color}) {
+function Separator() {
   return (
-     <View style={[styles.itemSeparator, {backgroundColor: color}]}/>
+     <View style={[styles.itemSeparator]}/>
   );
 }
   const styles = StyleSheet.create({
