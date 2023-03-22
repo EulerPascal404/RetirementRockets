@@ -7,6 +7,9 @@ import colors from '../config/colors';
 export default function Home({ navigation }) {
 
     return(
+      
+
+      
         <View> 
         <Text>{"Welcome User!"}</Text>
         <Text>{"Your savings"}</Text>

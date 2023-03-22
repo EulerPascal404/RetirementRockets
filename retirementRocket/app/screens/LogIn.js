@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput, CommonActions } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, CommonActions,NavigationContainer } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 
 import MyButton from '../components/MyButton';
 import colors from '../config/colors';
+import Home from "./Home";
+export default function LogIn({ navigation}) {
 
-export default function LogIn({ navigation, route }) {
+
+
+
   return (
     <View style={styles.container}>
       <Text>{"El Primo Finance"}</Text>
@@ -27,13 +31,13 @@ export default function LogIn({ navigation, route }) {
         // onPress={() =>
         //   navigation.dispatch(
         //     CommonActions.navigate({
-        //       name: 'Home',
-          
+        //       name: HomeDrawer,
+              
         //     })
         //   )
         // }
       
-      } 
+  }
 
         backColor={colors.purple}
       />
