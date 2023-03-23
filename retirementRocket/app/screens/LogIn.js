@@ -1,52 +1,73 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput, CommonActions,NavigationContainer } from 'react-native';
-import { StackActions } from '@react-navigation/native';
 
 import MyButton from '../components/MyButton';
 import colors from '../config/colors';
-import Home from "./Home";
+import Separator from '../components/Separator';
 export default function LogIn({ navigation}) {
-
-
-
 
   return (
     <View style={styles.container}>
-      <Text>{"El Primo Finance"}</Text>
-      <Text>{"Hi there! Nice to see you again"}</Text>
-      <Text>{"Email"}</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Enter Username"
-      />
-      <Text>{"Password"}</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Enter Password"
-      />
-      <MyButton 
-        title='Login'
-        //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
-        onPress={() => navigation.push("HomeDrawer")
-        // onPress={() =>
-        //   navigation.dispatch(
-        //     CommonActions.navigate({
-        //       name: HomeDrawer,
-              
-        //     })
-        //   )
-        // }
-      
-  }
+      <View style={styles.centerContainer}> 
+        <Text style={[styles.gray, {paddingTop: 150}]}> El Primo Finance </Text>
+      </View>
 
-        backColor={colors.purple}
-      />
-      <MyButton 
-        title='Sign Up'
-        //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
-        onPress={() => navigation.push("SignUp")}
-        backColor={colors.purple}
+      <View style={styles.leftContainer}> 
+        <Text style={[styles.bold, {marginTop: 30}, {paddingLeft: 40}]}> Sign In </Text>
+        <Text style={[styles.gray, {paddingLeft: 42}, {paddingTop: 10}]}> Hi there! Nice to see you again </Text>
+      </View>
+
+      <View style={[styles.container, {paddingLeft: 35}]}>
+        <View style={styles.leftContainer}>
+            <Text style={[styles.purple, {marginTop: 20}, {paddingLeft: 7}]}> Email </Text>
+        </View>
+
+        <View style={[styles.leftContainer, {paddingLeft: 31}]}>
+          <TextInput
+            style={{height: 40}}
+            placeholder="example@gmail.com"
+          />
+          <Separator/>
+        </View>
+        
+        <View style={styles.leftContainer}>
+          <Text style={[styles.purple, {paddingLeft: 8}, {paddingTop: 10}]}> Password </Text>
+        </View>
+
+        <View style= {[styles.leftContainer, {paddingLeft: 31}]}>
+          <TextInput
+            style={{height: 40}}
+          />
+          <Separator/>
+        </View>
+      </View>
+      
+
+      <View style={styles.centerContainer}> 
+        <MyButton 
+          title='Sign In'
+          //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
+          onPress={() => navigation.push("HomeDrawer")}
+          // onPress={() =>
+          //   navigation.dispatch(
+          //     CommonActions.navigate({
+          //       name: HomeDrawer,
+                
+          //     })
+          //   )
+          // }
+          backColor={colors.purple}
+
         />
+        <MyButton 
+          title='Sign Up'
+          //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
+          onPress={() => navigation.push("SignUp")}
+          backColor={colors.purple}
+          />
+      </View>
+
+      
       <StatusBar style="auto" />
     </View>
   );
@@ -54,10 +75,31 @@ export default function LogIn({ navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-      borderColor: "gray",
+    width: "100%",
+  },
+
+  leftContainer: {
+    paddingLeft: 20,
+    width: "100%",
+  },
+
+  centerContainer: {
       width: "100%",
-      borderWidth: 1,
-      borderRadius: 10,
-      padding: 10,
-    },
+      alignItems: 'center'
+  },
+
+    purple:{
+      color: '#6334e3',
+      fontSize: 14,
+  },
+
+    bold:{
+      fontWeight: 'bold',
+      fontSize: 20,
+  },
+    gray: {
+      color: '#808080',
+      fontSize: 16,
+    }
+      
 });
