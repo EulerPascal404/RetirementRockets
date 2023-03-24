@@ -4,6 +4,7 @@ import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 import MyButton from '../components/MyButton';
 import Separator from '../components/Separator';
 import colors from '../config/colors';
+import MyTextButton from '../components/MyTextButton';
 
 export default function SignUp({ navigation }) {
   return (
@@ -43,24 +44,25 @@ export default function SignUp({ navigation }) {
         </Text>
       </View>
 
-      <View style={[styles.centerContainer, {paddingTop: 30}]}>
+      <View style={[styles.centerContainer, {paddingTop: 15}]}>
         <MyButton
           title= "Continue"
           backColor={colors.purple}
           onPress={() => navigation.push("HomeDrawer")}
         />
 
-        <MyButton 
-          title="Have an account? Sign In"  
-          backColor={colors.purple}
-          onPress={() => navigation.push("LogIn")}
-        />
+      <View style = {[styles.textbuttons]}>
+        <Text style={[styles.gray, {fontSize: 14}]}> Have an account? </Text>
+          
+          <MyTextButton 
+              text = 'Sign In'  
+              onPress={() => navigation.push("HomeDrawer")}
+          />
+        </View>
       </View>
         
     </View>
       
-
-    
   )
 };
 
@@ -87,5 +89,15 @@ const styles = StyleSheet.create({
     bold:{
       fontWeight: 'bold',
       fontSize: 20,
+  },
+
+    gray: {
+      color: '#808080',
+      fontSize: 14,
+  },
+
+  textbuttons: {
+    flexDirection: 'row' ,
+    alignItems: 'center'
   }
 });

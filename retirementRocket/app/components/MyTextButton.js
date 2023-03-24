@@ -2,19 +2,18 @@ import * as React from 'react';
 import {View, StyleSheet, Text, Pressable} from 'react-native';
 import colors from '../config/colors';
 
-function MyText({onClick}) {
+function MyTextButton({text, onPress}) {
   return (
-  <Pressable onPress={onClick}>
-        <Text style={styles.clicky}>This is clickable text</Text>
-      </Pressable>  );
+  <Pressable onPress={onPress}>
+        <Text style={styles.clicky}> {text} </Text>
+  </Pressable>  );
 }
 
 const styles = StyleSheet.create({
   clicky:{
-  
     color: colors.purple,
-    fontSize:20,
+    fontSize: 14,
   },
 })
 
-export default MyText;
+export default MyTextButton;

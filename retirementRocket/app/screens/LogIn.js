@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, TextInput, CommonActions,NavigationCont
 import MyButton from '../components/MyButton';
 import colors from '../config/colors';
 import Separator from '../components/Separator';
+import MyTextButton from '../components/MyTextButton';
 export default function LogIn({ navigation}) {
 
   return (
@@ -46,28 +47,22 @@ export default function LogIn({ navigation}) {
       <View style={styles.centerContainer}> 
         <MyButton 
           title='Sign In'
-          //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
           onPress={() => navigation.push("HomeDrawer")}
-          // onPress={() =>
-          //   navigation.dispatch(
-          //     CommonActions.navigate({
-          //       name: HomeDrawer,
-                
-          //     })
-          //   )
-          // }
           backColor={colors.purple}
 
         />
-        <MyButton 
-          title='Sign Up'
-          //onPress={() => navigation.navigate('Root', { screen: 'SignUp' })}
-          onPress={() => navigation.push("SignUp")}
-          backColor={colors.purple}
-          />
+        
+      </View>
+      
+      <View style={[styles.textbuttons]}>
+        <Text style={[styles.gray, {fontSize: 14}]}> Forgot Password? </Text>
+
+        <MyTextButton 
+            text = 'Sign Up'  
+            onPress={() => navigation.push("SignUp")}
+        /> 
       </View>
 
-      
       <StatusBar style="auto" />
     </View>
   );
@@ -100,6 +95,11 @@ const styles = StyleSheet.create({
     gray: {
       color: '#808080',
       fontSize: 16,
+  },
+
+    textbuttons: {
+      flexDirection: 'row' ,
+      alignItems: 'center'
     }
       
 });
