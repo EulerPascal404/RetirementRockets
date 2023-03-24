@@ -9,7 +9,7 @@ function Separator() {
 }
   const styles = StyleSheet.create({
     itemSeparator: {
-    width: '100%',
+    width: '80%',
     height: 2,
     backgroundColor: 'black',
     marginBottom: 10,
