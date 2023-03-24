@@ -21,7 +21,6 @@ export default function App() {
            return (
           
                <Drawer.Navigator >
-                 <Drawer.Screen name="Home" component={Home} />
                  <Drawer.Screen name="Simulate" component={Simulate} />
                  <Drawer.Screen name="News" component = {News} />
                  <Drawer.Screen name="Profile" component = {Profile} />
