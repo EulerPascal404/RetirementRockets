@@ -10,7 +10,6 @@ import SignUp from "./SignUp";
 import Home from "./Home";
 import { getActiveChildNavigationOptions } from 'react-navigation';
 import Simulate from './Simulate';
-import News from './News';
 import Profile from './Profile';
    
 const Drawer = createDrawerNavigator();       
@@ -22,7 +21,7 @@ export default function App() {
           
                <Drawer.Navigator >
                  <Drawer.Screen name="Simulate" component={Simulate} />
-                 <Drawer.Screen name="News" component = {News} />
+                 {/* <Drawer.Screen name="News" component = {News} /> */}
                  <Drawer.Screen name="Profile" component = {Profile} />
 
                </Drawer.Navigator>
