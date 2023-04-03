@@ -1,30 +1,43 @@
-import HomeScreen from './app/screens/HomeScreen';
-import SecondScreen from './app/screens/SecondScreen';
-import ThirdScreen from './app/screens/ThirdScreen';
+import 'react-native-gesture-handler';
+import SignUp from './app/screens/SignUp';
+import LogIn from './app/screens/LogIn';
+import HomeDrawer from "./app/screens/HomeDrawer";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {BackHandler} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
+  
   return (
+    
     <NavigationContainer>
+       
       <Stack.Navigator>
+        
         <Stack.Screen 
-          name="Home"
-          component={HomeScreen}
-          options={{title: "Welcome"}}
+          name="LogIn"
+          component={LogIn}
+          options={{headerShown:false}}
         />
+        
         <Stack.Screen 
-          name="Second"
-          component={SecondScreen}
+          name="SignUp"
+          component={SignUp}
+          options={{headerShown:false}}
         />
+
         <Stack.Screen 
-          name="Third"
-          component={ThirdScreen}
-          options={{headerShown: false}}
+          name="HomeDrawer"
+          component={HomeDrawer}
+          options={{headerShown:false}}
         />
+      
       </Stack.Navigator>
     </NavigationContainer>
+    
   );
+  
 }
