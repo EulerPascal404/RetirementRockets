@@ -51,16 +51,16 @@ export default function SignUp({ navigation }) {
           onPress={() => navigation.push("HomeDrawer")}
         />
 
-      <View style = {[styles.textbuttons]}>
-        <Text style={[styles.gray, {fontSize: 14}]}> Have an account? </Text>
-          
-          <MyTextButton 
-              text = 'Sign In'  
-              onPress={() => navigation.push("HomeDrawer")}
-          />
+        <View style = {[styles.textbuttons]}>
+          <Text style={[styles.gray, {fontSize: 14}]}> Have an account? </Text>
+            
+            <MyTextButton 
+                text = 'Sign In'  
+                onPress={() => navigation.push("HomeDrawer")}
+            />
         </View>
       </View>
-        
+      
     </View>
       
   )
