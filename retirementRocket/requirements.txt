@@ -1,1 +1,2 @@
 reduxjs\toolkit react-redux redux
+npm install react-navigation

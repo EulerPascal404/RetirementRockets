@@ -49,20 +49,19 @@ export default function LogIn({ navigation}) {
           title='Sign In'
           onPress={() => navigation.push("HomeDrawer")}
           backColor={colors.purple}
-
         />
-        
+
+        <View style={[styles.textbuttons]}>
+          <Text style={[styles.gray, {fontSize: 14}]}> Forgot Password? </Text>
+
+          <MyTextButton 
+              text = 'Sign Up'  
+              onPress={() => navigation.push("SignUp")}
+          /> 
+        </View>
       </View>
       
-      <View style={[styles.textbuttons]}>
-        <Text style={[styles.gray, {fontSize: 14}]}> Forgot Password? </Text>
-
-        <MyTextButton 
-            text = 'Sign Up'  
-            onPress={() => navigation.push("SignUp")}
-        /> 
-      </View>
-
+      
       <StatusBar style="auto" />
     </View>
   );
