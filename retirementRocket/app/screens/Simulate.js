@@ -6,10 +6,23 @@ import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 export default function Simulate({ navigation }) {
     return (
           <View style={styles.container}>
-            <View style={styles.square} ></View>
-            <View style={styles.square} ></View>
-            <View style={styles.circle} ></View>
+
+          <Text style={[{fontSize: 15, fontWeight: 'bold'}]}> Overview 
+        </Text>
+
+            <View style={[styles.circle,{marginTop: 0}]} ></View>
+
+            <Text style={[{fontSize: 15, fontWeight: 'bold'},{marginTop: 180}]}> Charts 
+        </Text>
+
+            <View style={[styles.circle]} ></View>
+
+            <Text style={[{fontSize: 15, fontWeight: 'bold'},{marginTop: 180}]}> News 
+        </Text>
+
+            <View style={[styles.circle1]} ></View>
           </View>
+         
       );
           
 }
@@ -20,7 +33,7 @@ const styles = StyleSheet.create({
       alignItems: 'flex-end', 
       justifyContent: 'center', 
       flexDirection: 'column',
-      rowGap: 180,
+      //rowGap: 180,
       padding: 20,
       
     },
@@ -32,14 +45,16 @@ const styles = StyleSheet.create({
       
     },
 
-    square1: {
-      width: 85,
+    circle1: {
+      width: 130,
       height: 7,
+      borderRadius: 100 / 7,
       backgroundColor: 'black'
     },
     circle: {
-      width: 170,
       height: 7,
-      borderRadius: 150 / 2,
+      width: 170,
+      borderRadius: 100 / 7,
+      backgroundColor: 'black'
     }
   });
