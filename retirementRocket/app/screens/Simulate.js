@@ -6,9 +6,9 @@ import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 export default function Simulate({ navigation }) {
     return (
           <View style={styles.container}>
-            <View style={styles.square} ><Text>hi</Text></View>
             <View style={styles.square} ></View>
             <View style={styles.square} ></View>
+            <View style={styles.circle} ></View>
           </View>
       );
           
@@ -17,14 +17,29 @@ const styles = StyleSheet.create({
     container: {
       backgroundColor: '#7CA1B4',
       flex: 1,
-      alignItems: 'center', 
+      alignItems: 'flex-end', 
       justifyContent: 'center', 
-      flexDirection: 'row',
-      columnGap: 40,
+      flexDirection: 'column',
+      rowGap: 180,
+      padding: 20,
+      
     },
+    
     square: {
-      width: 90,
-      height: 90,
+      width: 170,
+      height: 7,
+      backgroundColor: 'black'
+      
+    },
+
+    square1: {
+      width: 85,
+      height: 7,
       backgroundColor: 'black'
     },
+    circle: {
+      width: 170,
+      height: 7,
+      borderRadius: 150 / 2,
+    }
   });
