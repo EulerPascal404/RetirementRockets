@@ -6,6 +6,7 @@ import 'firebase/auth';
 import Constants from 'expo-constants'; 
 
 // Your web app's Firebase configuration
+//hi
 const firebaseConfig = {
   apiKey: "AIzaSyBhasApwps8oddS1uwBOYLnSIiFgL1A0G0",
   authDomain: "rnfirebaseexampleapp-78953.firebaseapp.com",

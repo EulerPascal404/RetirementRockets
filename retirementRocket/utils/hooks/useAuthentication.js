@@ -5,6 +5,7 @@ const auth = getAuth();
 
 export function useAuthentication() {
   const [user, setUser] = React.useState();
+  //hi
 
   React.useEffect(() => {
     const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {

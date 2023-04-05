@@ -11,6 +11,6 @@ import AuthStack from './authStack';
 
 export default function RootNavigation() {
   const { user } = useAuthentication();
-
+//hi
   return user ? <UserStack /> : <AuthStack />;
 }
