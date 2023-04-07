@@ -12,7 +12,7 @@ function ProfileSeparator() {
     width: '80%',
     height: 1,
     backgroundColor: 'gray',
-    marginBottom: 10,
+    marginTop: 10,
   },
 });
 

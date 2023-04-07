@@ -7,11 +7,10 @@ import { NavigationContainer }
          
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
-import Home from "./Home";
 import { getActiveChildNavigationOptions } from 'react-navigation';
 import Simulate from './Simulate';
 import Profile from './Profile';
-   
+import News from './News'
 const Drawer = createDrawerNavigator();       
 
 export default function App() {
@@ -21,7 +20,7 @@ export default function App() {
           
                <Drawer.Navigator >
                  <Drawer.Screen name="Simulate" component={Simulate} />
-                 {/* <Drawer.Screen name="News" component = {News} /> */}
+                 <Drawer.Screen name="News" component = {News} />
                  <Drawer.Screen name="Profile" component = {Profile} />
 
                </Drawer.Navigator>
