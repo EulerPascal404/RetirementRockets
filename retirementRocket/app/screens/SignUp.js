@@ -30,6 +30,7 @@ export default function SignUp({ navigation }) {
       <View style={styles.leftContainer}>
         <TextInput
           style={{height: 40}}
+          secureTextEntry={true}
         />
         <Separator/>
       </View>

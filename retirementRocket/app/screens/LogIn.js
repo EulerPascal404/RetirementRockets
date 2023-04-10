@@ -38,6 +38,7 @@ export default function LogIn({ navigation}) {
         <View style= {[styles.leftContainer, {paddingLeft: 31}]}>
           <TextInput
             style={{height: 40}}
+            secureTextEntry= {true}
           />
           <Separator/>
         </View>
