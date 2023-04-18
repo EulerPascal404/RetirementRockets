@@ -1,4 +1,6 @@
 import React from "react";
+
+import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 import {
   LineChart,
@@ -10,7 +12,10 @@ import {
 } from "react-native-chart-kit";
 
 
+
 export default function Simulate({ navigation }) {
+  const { user } = useAuthentication();
+
     return (
           <View style={styles.container}>
 

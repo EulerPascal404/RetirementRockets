@@ -1,3 +1,4 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 
@@ -5,8 +6,58 @@ import MyButton from '../components/MyButton';
 import Separator from '../components/Separator';
 import colors from '../config/colors';
 import MyTextButton from '../components/MyTextButton';
+import '../config/firebase';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
+import { StackScreenProps } from '@react-navigation/stack';
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 
+
+const auth = getAuth();
 export default function SignUp({ navigation }) {
+  const [value, setValue] = React.useState({
+    email: '',
+    password: '',
+    error: ''
+  })
+  async function signUp() {
+    if (value.email === '' || value.password === '') {
+      setValue({
+        ...value,
+        error: 'Email and password are mandatory.'
+      })
+      return;
+    }
+  
+    try {
+      await createUserWithEmailAndPassword(auth, value.email, value.password);
+      navigation.push("HomeDrawer");
+    } catch (error) {
+      setValue({
+        ...value,
+        error: error.message,
+      })
+    }
+  }
+  async function signIn() {
+    if (value.email === '' || value.password === '') {
+      setValue({
+        ...value,
+        error: 'Email and password are mandatory.'
+      })
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, value.email, value.password);
+      navigation.push("HomeDrawer");
+    } catch (error) {
+      setValue({
+        ...value,
+        error: error.message,
+      })
+    }
+  }
   return (
     <View style = {styles.container}>
         <Text style={[styles.bold, {marginTop: 60}, {paddingLeft: 40}]}> Sign Up </Text>
@@ -19,6 +70,7 @@ export default function SignUp({ navigation }) {
         <TextInput
           style={{height: 40}}
           placeholder="Your email adress"
+          onChangeText={(text) => setValue({ ...value, email: text })}
         />
         <Separator/>
       </View>
@@ -30,6 +82,7 @@ export default function SignUp({ navigation }) {
       <View style={styles.leftContainer}>
         <TextInput
           style={{height: 40}}
+          onChangeText={(text) => setValue({ ...value, password: text })}
         />
         <Separator/>
       </View>
@@ -48,7 +101,7 @@ export default function SignUp({ navigation }) {
         <MyButton
           title= "Continue"
           backColor={colors.purple}
-          onPress={() => navigation.push("HomeDrawer")}
+          onPress={signUp}
         />
 
         <View style = {[styles.textbuttons]}>
@@ -56,7 +109,7 @@ export default function SignUp({ navigation }) {
             
             <MyTextButton 
                 text = 'Sign In'  
-                onPress={() => navigation.push("HomeDrawer")}
+                onPress={signIn}
             />
         </View>
       </View>

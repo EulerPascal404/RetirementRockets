@@ -5,7 +5,8 @@ import HomeDrawer from "./app/screens/HomeDrawer";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {BackHandler} from 'react-native';
-
+import './app/config/firebase';
+import RootNavigation from './navigation';
 const Stack = createNativeStackNavigator();
 
 export default function App() {

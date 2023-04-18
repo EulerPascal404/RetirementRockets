@@ -3,11 +3,13 @@ import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import ProfileSeparator from '../components/ProfileSeparator';
+import { useAuthentication } from '../utils/hooks/useAuthentication';
+import {signOut, getAuth} from 'firebase/auth'
 import colors from '../config/colors';
-
+const auth = getAuth();
 export default function Profile({ navigation }) {
-
     return(
+
         <View style = {styles.container}>
 
           <View style = {styles.row}>
@@ -103,7 +105,7 @@ export default function Profile({ navigation }) {
           <View style={styles.centerContainer}> 
             <MyButton 
               title='Sign Out'
-              // onPress={() => navigation.push("HomeDrawer")}
+              onPress={() => signOut(auth)}
               backColor={colors.purple}
             />
           </View>

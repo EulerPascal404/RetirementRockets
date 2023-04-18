@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../screens/HomeScreen';
-//hi
+import HomeScreen from '../app/screens/Simulate';
+
 const Stack = createStackNavigator();
 
 export default function UserStack() {
