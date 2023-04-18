@@ -1,3 +1,4 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput, CommonActions,NavigationContainer } from 'react-native';
 
@@ -5,7 +6,35 @@ import MyButton from '../components/MyButton';
 import colors from '../config/colors';
 import Separator from '../components/Separator';
 import MyTextButton from '../components/MyTextButton';
-export default function LogIn({ navigation}) {
+import '../config/firebase';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+const auth = getAuth();
+
+export default function LogIn({ navigation }) {
+  const [value, setValue] = React.useState({
+    email: '',
+    password: '',
+    error: ''
+  })
+  async function signIn() {
+    if (value.email === '' || value.password === '') {
+      setValue({
+        ...value,
+        error: 'Email and password are mandatory.'
+      })
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, value.email, value.password);
+      navigation.push("HomeDrawer");
+    } catch (error) {
+      setValue({
+        ...value,
+        error: error.message,
+      })
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -27,6 +56,7 @@ export default function LogIn({ navigation}) {
           <TextInput
             style={{height: 40}}
             placeholder="example@gmail.com"
+            onChangeText={(text) => setValue({ ...value, email: text })}
           />
           <Separator/>
         </View>
@@ -38,6 +68,8 @@ export default function LogIn({ navigation}) {
         <View style= {[styles.leftContainer, {paddingLeft: 31}]}>
           <TextInput
             style={{height: 40}}
+            onChangeText={(text) => setValue({ ...value, password: text })}
+
           />
           <Separator/>
         </View>
@@ -47,7 +79,7 @@ export default function LogIn({ navigation}) {
       <View style={styles.centerContainer}> 
         <MyButton 
           title='Sign In'
-          onPress={() => navigation.push("HomeDrawer")}
+          onPress={signIn}
           backColor={colors.purple}
         />
 
