@@ -15,7 +15,7 @@ function MyButton({title, onPress, backColor,}) {
 const styles = StyleSheet.create({
    rectangle: {
    height: 50,
-   width: 300,
+   width: '70%',
    alignItems: 'center',
    justifyContent: 'center',
    margin: 10,

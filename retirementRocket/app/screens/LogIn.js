@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput, CommonActions,NavigationContainer } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, TextInput, CommonActions,NavigationContainer } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import colors from '../config/colors';
@@ -38,43 +38,34 @@ export default function LogIn({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.centerContainer}> 
-        <Text style={[styles.gray, {paddingTop: 150}]}> El Primo Finance </Text>
-      </View>
-
-      <View style={styles.leftContainer}> 
-        <Text style={[styles.bold, {marginTop: 30}, {paddingLeft: 40}]}> Sign In </Text>
-        <Text style={[styles.gray, {paddingLeft: 42}, {paddingTop: 10}]}> Hi there! Nice to see you again </Text>
-      </View>
-
-      <View style={[styles.container, {paddingLeft: 35}]}>
-        <View style={styles.leftContainer}>
-            <Text style={[styles.purple, {marginTop: 20}, {paddingLeft: 7}]}> Email </Text>
+       <View style={styles.centerContainer}> 
+        <Image
+          style={[styles.imageStyles, {height: 150}, {width: 250}, {marginTop: 40}]}
+          source={require('../assets/logo.png')}
+        />
         </View>
 
-        <View style={[styles.leftContainer, {paddingLeft: 31}]}>
-          <TextInput
-            style={{height: 40}}
-            placeholder="example@gmail.com"
-            onChangeText={(text) => setValue({ ...value, email: text })}
+      <Text style={[styles.bold, {marginTop: 30}, {paddingLeft: 40}]}> Sign In </Text>
+      <Text style={[styles.gray, {paddingLeft: 40}, {paddingTop: 10}]}> Hi there! Nice to see you again </Text>
+
+      <View style={styles.leftContainer}>
+        <Text style={[styles.purple, {marginTop: 20}, {paddingRight: 295}]}> Email </Text>
+        <TextInput
+          style={{height: 40}}
+          placeholder="example@gmail.com"
+          onChangeText={(text) => setValue({ ...value, email: text })}
           />
-          <Separator/>
-        </View>
-        
-        <View style={styles.leftContainer}>
-          <Text style={[styles.purple, {paddingLeft: 8}, {paddingTop: 10}]}> Password </Text>
-        </View>
+        <Separator/>
 
-        <View style= {[styles.leftContainer, {paddingLeft: 31}]}>
-          <TextInput
-            style={{height: 40}}
-            onChangeText={(text) => setValue({ ...value, password: text })}
+        <Text style={[styles.purple, {paddingRight: 270}]}> Password </Text>
 
-          />
-          <Separator/>
-        </View>
+        <TextInput
+          style={{height: 40}}
+          onChangeText={(text) => setValue({ ...value, password: text })}
+          secureTextEntry= {true}
+        />
+        <Separator/>
       </View>
-      
 
       <View style={styles.centerContainer}> 
         <MyButton 
@@ -102,10 +93,12 @@ export default function LogIn({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    height: "100%",
+    backgroundColor: "white"
   },
 
   leftContainer: {
-    paddingLeft: 20,
+    paddingLeft: 60,
     width: "100%",
   },
 
