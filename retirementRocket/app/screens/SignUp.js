@@ -1,15 +1,12 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
+import { Text, TextInput, StyleSheet, useState, View } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import Separator from '../components/Separator';
 import colors from '../config/colors';
 import MyTextButton from '../components/MyTextButton';
 import '../config/firebase';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-import { StackScreenProps } from '@react-navigation/stack';
+import CheckBox from '@react-native-community/checkbox';
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 
 
@@ -60,35 +57,34 @@ export default function SignUp({ navigation }) {
   }
   return (
     <View style = {styles.container}>
-        <Text style={[styles.bold, {marginTop: 100}, {paddingLeft: 40}]}> Sign Up </Text>
+      <Text style={[styles.bold, {marginTop: 100}, {paddingLeft: 40}]}> Sign Up </Text>
 
-        <View style={styles.leftContainer}>
-          <Text style={[styles.purple, {marginTop: 20}, {paddingRight: 295}]}> Email </Text>
+      <View style={styles.leftContainer}>
+        <Text style={[styles.purple, {marginTop: 20}, {paddingRight: 295}]}> Email </Text>
 
-          <TextInput
+        <TextInput
             style={{height: 40}}
             placeholder="Your email adress"
             onChangeText={(text) => setValue({ ...value, email: text })}
-          />
-          <Separator/>
+        />
+        <Separator/>
 
-          <Text style={[styles.purple, {paddingRight: 270}]}> Password </Text>
-          <TextInput
+        <Text style={[styles.purple, {paddingRight: 270}]}> Password </Text>
+        <TextInput
             style={{height: 40}}
             onChangeText={(text) => setValue({ ...value, password: text })}
             secureTextEntry= {true}
-          />
-          <Separator/>
-        </View>
+        />
+        <Separator/>
+      </View>
 
-      <View style={[styles.centerContainer, {paddingTop: 15}]}>
+      <View style={[styles.leftContainer, {paddingTop: 15}]}>
         <Text>I agree to the
-          <Text style={styles.purple}> Terms of Services 
-          </Text>
+          <Text style={styles.purple}> Terms of Services </Text>
           <Text> and </Text>
-          <Text style={styles.purple}>Privacy Policy. 
-          </Text>
         </Text>
+        <Text style={styles.purple}>Privacy Policy. </Text>
+
       </View>
 
       <View style={[styles.centerContainer, {paddingTop: 15}]}>
@@ -98,13 +94,13 @@ export default function SignUp({ navigation }) {
           onPress={signUp}
         />
 
-        <View style = {[styles.textbuttons]}>
-          <Text style={[styles.gray, {fontSize: 14}]}> Have an account? </Text>
+      <View style = {[styles.textbuttons]}>
+        <Text style={[styles.gray, {fontSize: 14}]}> Have an account? </Text>
             
-            <MyTextButton 
-                text = 'Sign In'  
-                onPress={() => navigation.push("LogIn")}
-                />
+          <MyTextButton 
+            text = 'Sign In'  
+            onPress={() => navigation.push("LogIn")}
+            />
         </View>
       </View>
       

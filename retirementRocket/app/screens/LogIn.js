@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, Button, TextInput, CommonActions,NavigationContainer } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, TextInput, CommonActions, NavigationContainer } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import colors from '../config/colors';
@@ -40,7 +40,7 @@ export default function LogIn({ navigation }) {
     <View style={styles.container}>
        <View style={styles.centerContainer}> 
         <Image
-          style={[styles.imageStyles, {height: 150}, {width: 250}, {marginTop: 40}]}
+          style={[styles.imageStyles, {height: 150}, {width: 250}, {marginTop: 60}]}
           source={require('../assets/logo.png')}
         />
         </View>
@@ -49,7 +49,7 @@ export default function LogIn({ navigation }) {
       <Text style={[styles.gray, {paddingLeft: 40}, {paddingTop: 10}]}> Hi there! Nice to see you again </Text>
 
       <View style={styles.leftContainer}>
-        <Text style={[styles.purple, {marginTop: 20}, {paddingRight: 295}]}> Email </Text>
+        <Text style={[styles.purple, {marginTop: 10}, {paddingRight: 295}]}> Email </Text>
         <TextInput
           style={{height: 40}}
           placeholder="example@gmail.com"
@@ -75,11 +75,11 @@ export default function LogIn({ navigation }) {
         />
 
         <View style={[styles.textbuttons]}>
-          <Text style={[styles.gray, {fontSize: 14}]}> Forgot Password? </Text>
+          <Text style={[styles.gray, {fontSize: 14}, {paddingRight: 100}]}> Forgot Password? </Text>
 
           <MyTextButton 
               text = 'Sign Up'  
-              onPress={() => navigation.push("SignUp")}
+                onPress={() => navigation.push("SignUp")}
           /> 
         </View>
       </View>
