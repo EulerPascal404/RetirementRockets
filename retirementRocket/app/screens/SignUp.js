@@ -7,10 +7,11 @@ import colors from '../config/colors';
 import MyTextButton from '../components/MyTextButton';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import '../config/firebase';
+import {auth} from '../config/firebase'
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 
 
-const auth = getAuth();
+//const auth = getAuth();
 export default function SignUp({ navigation }) {
   const [value, setValue] = React.useState({
     email: '',

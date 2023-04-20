@@ -7,8 +7,9 @@ import colors from '../config/colors';
 import Separator from '../components/Separator';
 import MyTextButton from '../components/MyTextButton';
 import '../config/firebase';
+import {auth} from '../config/firebase'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-const auth = getAuth();
+//const auth = getAuth();
 
 export default function LogIn({ navigation }) {
   const [value, setValue] = React.useState({
