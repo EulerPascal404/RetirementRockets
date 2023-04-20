@@ -5,8 +5,8 @@ import MyButton from '../components/MyButton';
 import Separator from '../components/Separator';
 import colors from '../config/colors';
 import MyTextButton from '../components/MyTextButton';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import '../config/firebase';
-import CheckBox from '@react-native-community/checkbox';
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 
 
@@ -55,6 +55,7 @@ export default function SignUp({ navigation }) {
       })
     }
   }
+
   return (
     <View style = {styles.container}>
       <Text style={[styles.bold, {marginTop: 100}, {paddingLeft: 40}]}> Sign Up </Text>
@@ -78,13 +79,25 @@ export default function SignUp({ navigation }) {
         <Separator/>
       </View>
 
-      <View style={[styles.leftContainer, {paddingTop: 15}]}>
+      <View style={[styles.checkboxContainer, {paddingTop: 15}]}>
+        <BouncyCheckbox
+          size={25}
+          fillColor= "#6334e3"
+          unfillColor="#FFFFFF"
+          iconStyle={{ borderColor: "#6334e3" }}
+          innerIconStyle={{ borderWidth: 2 }}
+          //onPress={(isChecked: checked) => {true}}
+        />
+
+
         <Text>I agree to the
           <Text style={styles.purple}> Terms of Services </Text>
           <Text> and </Text>
         </Text>
-        <Text style={styles.purple}>Privacy Policy. </Text>
+      </View>
 
+      <View style={[styles.leftContainer, {paddingLeft: 98}]}>
+        <Text style={styles.purple}> Privacy Policy. </Text>
       </View>
 
       <View style={[styles.centerContainer, {paddingTop: 15}]}>
@@ -95,7 +108,7 @@ export default function SignUp({ navigation }) {
         />
 
       <View style = {[styles.textbuttons]}>
-        <Text style={[styles.gray, {fontSize: 14}]}> Have an account? </Text>
+        <Text style={[styles.gray, {fontSize: 14}, {paddingRight: 10}]}> Have an account? </Text>
             
           <MyTextButton 
             text = 'Sign In'  
@@ -145,5 +158,11 @@ const styles = StyleSheet.create({
   textbuttons: {
     flexDirection: 'row' ,
     alignItems: 'center'
+  },
+
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 60,
   }
 });
