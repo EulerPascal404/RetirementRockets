@@ -1,15 +1,12 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
+import { Text, TextInput, StyleSheet, useState, View } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import Separator from '../components/Separator';
 import colors from '../config/colors';
 import MyTextButton from '../components/MyTextButton';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import '../config/firebase';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-import { StackScreenProps } from '@react-navigation/stack';
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 
 
@@ -58,43 +55,49 @@ export default function SignUp({ navigation }) {
       })
     }
   }
+
   return (
     <View style = {styles.container}>
-        <Text style={[styles.bold, {marginTop: 60}, {paddingLeft: 40}]}> Sign Up </Text>
-
-        <View style={styles.leftContainer}>
-          <Text style={[styles.purple, {marginTop: 20}, {paddingRight: 295}]}> Email </Text>
-        </View>
+      <Text style={[styles.bold, {marginTop: 100}, {paddingLeft: 40}]}> Sign Up </Text>
 
       <View style={styles.leftContainer}>
+        <Text style={[styles.purple, {marginTop: 20}, {paddingRight: 295}]}> Email </Text>
+
         <TextInput
-          style={{height: 40}}
-          placeholder="Your email adress"
-          onChangeText={(text) => setValue({ ...value, email: text })}
+            style={{height: 40}}
+            placeholder="Your email adress"
+            onChangeText={(text) => setValue({ ...value, email: text })}
         />
         <Separator/>
-      </View>
-      
-      <View style={styles.leftContainer}>
+
         <Text style={[styles.purple, {paddingRight: 270}]}> Password </Text>
-      </View>
-
-      <View style={styles.leftContainer}>
         <TextInput
-          style={{height: 40}}
-          onChangeText={(text) => setValue({ ...value, password: text })}
+            style={{height: 40}}
+            onChangeText={(text) => setValue({ ...value, password: text })}
+            secureTextEntry= {true}
         />
         <Separator/>
       </View>
 
-      <View style={[styles.centerContainer, {paddingTop: 15}]}>
+      <View style={[styles.checkboxContainer, {paddingTop: 15}]}>
+        <BouncyCheckbox
+          size={25}
+          fillColor= "#6334e3"
+          unfillColor="#FFFFFF"
+          iconStyle={{ borderColor: "#6334e3" }}
+          innerIconStyle={{ borderWidth: 2 }}
+          //onPress={(isChecked: checked) => {true}}
+        />
+
+
         <Text>I agree to the
-          <Text style={styles.purple}> Terms of Services 
-          </Text>
+          <Text style={styles.purple}> Terms of Services </Text>
           <Text> and </Text>
-          <Text style={styles.purple}>Privacy Policy. 
-          </Text>
         </Text>
+      </View>
+
+      <View style={[styles.leftContainer, {paddingLeft: 98}]}>
+        <Text style={styles.purple}> Privacy Policy. </Text>
       </View>
 
       <View style={[styles.centerContainer, {paddingTop: 15}]}>
@@ -104,12 +107,12 @@ export default function SignUp({ navigation }) {
           onPress={signUp}
         />
 
-        <View style = {[styles.textbuttons]}>
-          <Text style={[styles.gray, {fontSize: 14}]}> Have an account? </Text>
+      <View style = {[styles.textbuttons]}>
+        <Text style={[styles.gray, {fontSize: 14}, {paddingRight: 10}]}> Have an account? </Text>
             
-            <MyTextButton 
-                text = 'Sign In'  
-                onPress={signIn}
+          <MyTextButton 
+            text = 'Sign In'  
+            onPress={() => navigation.push("LogIn")}
             />
         </View>
       </View>
@@ -122,11 +125,14 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    height: "100%",
+    backgroundColor: 'white'
   },
 
   leftContainer: {
     paddingLeft: 60,
     width: "100%",
+    backgroundColor: 'white'
   },
 
   centerContainer: {
@@ -152,5 +158,11 @@ const styles = StyleSheet.create({
   textbuttons: {
     flexDirection: 'row' ,
     alignItems: 'center'
+  },
+
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 60,
   }
 });
