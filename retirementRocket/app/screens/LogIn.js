@@ -1,90 +1,114 @@
-import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, Button, TextInput, CommonActions, NavigationContainer } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, TextInput, View, Button } from 'react-native';
 
-import MyButton from '../components/MyButton';
-import colors from '../config/colors';
-import Separator from '../components/Separator';
-import MyTextButton from '../components/MyTextButton';
-import '../config/firebase';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-const auth = getAuth();
-
-export default function LogIn({ navigation }) {
-  const [value, setValue] = React.useState({
-    email: '',
-    password: '',
-    error: ''
-  })
-  async function signIn() {
-    if (value.email === '' || value.password === '') {
-      setValue({
-        ...value,
-        error: 'Email and password are mandatory.'
+export default function App() {
+  let [employeeId, setEmployeeId] = useState("");
+  let [employeeName, setEmployeeName] = useState("");
+  let url =  "exp://10.20.16.65:19000";
+  let getEmployees = () => {
+    console.log(url + "/employees")
+    fetch('http://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson.movies;
       })
-      return;
-    }
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-    try {
-      await signInWithEmailAndPassword(auth, value.email, value.password);
-      navigation.push("HomeDrawer");
-    } catch (error) {
-      setValue({
-        ...value,
-        error: error.message,
-      })
-    }
-  }
+  let getEmployee = (id) => {
+    fetch(`http://127.0.0.1:5000/employees/${id}`)
+    .then(res => {
+      console.log(res.status);
+      console.log(res.headers);
+      return res.json();
+    })
+    .then(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  };
+
+  let deleteEmployee = (id) => {
+    fetch(`http://127.0.0.1:5000/employees/${id}`, {
+      method: "DELETE"
+    })
+    .then(res => {
+      console.log(res.status);
+      console.log(res.headers);
+      return res.json();
+    })
+    .then(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  };
+
+  let updateEmployee = (id, name) => {
+    fetch(`http://127.0.0.1:5000/employees/${id}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name: name})
+    })
+    .then(res => {
+      console.log(res.status);
+      console.log(res.headers);
+      return res.json();
+    })
+    .then(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  };
+
+  let createEmployee = (name) => {
+    fetch(`http://127.0.0.1:5000/employees`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name: name})
+    })
+    .then(res => {
+      console.log(res.status);
+      console.log(res.headers);
+      return res.json();
+    })
+    .then(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  };
 
   return (
     <View style={styles.container}>
-       <View style={styles.centerContainer}> 
-        <Image
-          style={[styles.imageStyles, {height: 150}, {width: 250}, {marginTop: 60}]}
-          source={require('../assets/logo.png')}
-        />
-        </View>
-
-      <Text style={[styles.bold, {marginTop: 30}, {paddingLeft: 40}]}> Sign In </Text>
-      <Text style={[styles.gray, {paddingLeft: 40}, {paddingTop: 10}]}> Hi there! Nice to see you again </Text>
-
-      <View style={styles.leftContainer}>
-        <Text style={[styles.purple, {marginTop: 10}, {paddingRight: 295}]}> Email </Text>
-        <TextInput
-          style={{height: 40}}
-          placeholder="example@gmail.com"
-          onChangeText={(text) => setValue({ ...value, email: text })}
-          />
-        <Separator/>
-
-        <Text style={[styles.purple, {paddingRight: 270}]}> Password </Text>
-
-        <TextInput
-          style={{height: 40}}
-          onChangeText={(text) => setValue({ ...value, password: text })}
-          secureTextEntry= {true}
-        />
-        <Separator/>
-      </View>
-
-      <View style={styles.centerContainer}> 
-        <MyButton 
-          title='Sign In'
-          onPress={signIn}
-          backColor={colors.purple}
-        />
-
-        <View style={[styles.textbuttons]}>
-          <Text style={[styles.gray, {fontSize: 14}, {paddingRight: 100}]}> Forgot Password? </Text>
-
-          <MyTextButton 
-              text = 'Sign Up'  
-                onPress={() => navigation.push("SignUp")}
-          /> 
-        </View>
-      </View>
-      
-      
+      <TextInput placeholder='Employee Id' style={styles.input} value={employeeId} onChangeText={(value) => setEmployeeId(value)} /> 
+      <TextInput placeholder='Employee Name' style={styles.input} value={employeeName} onChangeText={(value) => setEmployeeName(value)} /> 
+      <Button title="Get" onPress={getEmployees} />
+      <Button title="Get By Id" onPress={() => getEmployee(employeeId)} />
+      <Button title="Delete By Id" onPress={() => deleteEmployee(employeeId)} />
+      <Button title="Update By Id" onPress={() => updateEmployee(employeeId, employeeName)} />
+      <Button title="Create" onPress={() => createEmployee(employeeName)} />
       <StatusBar style="auto" />
     </View>
   );
@@ -92,38 +116,14 @@ export default function LogIn({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "white"
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
-  leftContainer: {
-    paddingLeft: 60,
-    width: "100%",
-  },
-
-  centerContainer: {
-      width: "100%",
-      alignItems: 'center'
-  },
-
-    purple:{
-      color: '#6334e3',
-      fontSize: 14,
-  },
-
-    bold:{
-      fontWeight: 'bold',
-      fontSize: 20,
-  },
-    gray: {
-      color: '#808080',
-      fontSize: 16,
-  },
-
-    textbuttons: {
-      flexDirection: 'row' ,
-      alignItems: 'center'
-    }
-      
+  input: {
+    alignSelf: "stretch",
+    margin: 8,
+    padding: 4
+  }
 });
