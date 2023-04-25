@@ -1,4 +1,5 @@
 import json
+import requests
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -7,6 +8,11 @@ employees = [
   { 'id': 1, 'name': 'Mary' },
   { 'id': 2, 'name': 'Harry' },
   { 'id': 3, 'name': 'Sally' }
+]
+
+user = [
+  {},
+
 ]
 
 nextEmployeeId = 4
@@ -67,5 +73,53 @@ def delete_employee(id: int):
 
   employees = [e for e in employees if e['id'] != id]
   return jsonify(employee), 200
+
+import requests    
+
+@app.route('/news/<string:stock>', methods=['GET'])
+def get_news_by_stock(stock: string):
+  articles = News(stock)
+  return jsonify(articles)
+
+def get_employee(id):
+  return next((e for e in employees if e['id'] == id), None)
+
+def employee_is_valid(employee):
+  for key in employee.keys():
+    if key != 'name':
+      return False
+  return True
+ 
+def News(stock):
+    # BBC news api
+    # following query parameters are used
+    # source, sortBy and apiKey
+    api_key = "851e17dfa3654616b28493114a1781e0"
+    query_params = {
+      "q": stock,
+      "source": "google-news",
+      "sortBy": "popularity",
+      "apiKey": api_key,
+    }
+    main_url = "https://newsapi.org/v2/everything?"
+    # fetching data in json format
+    res = requests.get(main_url, params=query_params)
+    open_bbc_page = res.json()
+ 
+    # getting all articles in a string article
+    article = open_bbc_page["articles"]
+ 
+    # empty list which will
+    # contain all trending news
+    results = []
+    return article
+    for ar in article:
+        print(ar)
+        results.append(ar["title"])
+         
+    for i in range(len(results)):
+         
+        # printing all trending news
+        print(i + 1, results[i])          
 
 app.run()

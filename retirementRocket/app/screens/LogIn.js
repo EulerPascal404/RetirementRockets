@@ -11,6 +11,7 @@ export default function App() {
     fetch('http://facebook.github.io/react-native/movies.json')
       .then((response) => response.json())
       .then((responseJson) => {
+        console.log(responseJson)
         return responseJson.movies;
       })
       .catch((error) => {
