@@ -47,7 +47,7 @@ export default function LogIn({ navigation }) {
         </View>
 
       <Text style={[styles.bold, {marginTop: 30}, {paddingLeft: 40}]}> Sign In </Text>
-      <Text style={[styles.gray, {paddingLeft: 40}, {paddingTop: 10}]}> Hi there! Nice to see you again </Text>
+      <Text style={[styles.gray, {paddingLeft: 42}, {paddingTop: 10}]}> Hi there! Nice to see you again. </Text>
 
       <View style={styles.leftContainer}>
         <Text style={[styles.purple, {marginTop: 10}, {paddingRight: 295}]}> Email </Text>

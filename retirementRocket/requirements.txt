@@ -1,4 +1,5 @@
-reduxjs\toolkit react-redux redux
 npm install react-navigation
 npm install react-native-chart-kit
 npm expo install react-native-svg
+npm install firebase
+npm install react-native-bouncy-checkbox
