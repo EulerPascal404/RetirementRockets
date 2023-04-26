@@ -1,16 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
+import { Text, TextInput, StyleSheet, Button, View, ScrollView } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import ProfileSeparator from '../components/ProfileSeparator';
 import colors from '../config/colors';
+import { SearchBar } from 'react-native-elements';
 
 
 export default function News({ navigation }) {
-
+ 
+  
     return(
         <View style = {styles.container}>
-            
+          <View style = {{backgroundColor: 'white'}}>
+           <ScrollView persistentScrollbar={true}
+           > 
           <View style = {styles.row}>
             <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
           </View>
@@ -43,44 +47,79 @@ export default function News({ navigation }) {
             <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
           </View>
           <View style = {styles.centerContainer}>
-            <View style = {styles.specialSeparator}>
-            </View>
+            <ProfileSeparator/>
+          </View>
+
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+          <View style = {styles.row}>
+            <Text style={[styles.text, {paddingRight: 282}, {marginTop: 20}]}> Title </Text>
+          </View>
+          <View style = {styles.centerContainer}>
+            <ProfileSeparator/>
+          </View>
+
+       
+
+         
+
+          </ScrollView>
           </View>
           
-          <View style = {styles.lightGrayBox}>
-            <Text style={[styles.gray, {paddingTop: 3}]}> Your Authors </Text>
-          </View>
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingRight: 256}, {marginTop: 20}]}> Author </Text>
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
-
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingRight: 256}, {marginTop: 20}]}> Author </Text>
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
-
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingRight: 256}, {marginTop: 20}]}> Author </Text>
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
-
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingRight: 256}, {marginTop: 20}]}> Author </Text>
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
-
+         
+        
+          
         </View>
-    )
+    );
 
 
 
@@ -89,6 +128,7 @@ export default function News({ navigation }) {
 const styles = StyleSheet.create({
     container: {
       width: "100%",
+      height: "100%"
     },
 
     text: {

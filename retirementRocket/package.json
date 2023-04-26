@@ -21,7 +21,7 @@
     "expo": "~48.0.5",
     "expo-constants": "^14.2.1",
     "expo-status-bar": "~1.4.4",
-    "firebase": "^9.19.1",
+    "firebase": "^9.20.0",
     "react": "18.2.0",
     "react-native": "0.71.6",
     "react-native-bouncy-checkbox": "^3.0.7",
