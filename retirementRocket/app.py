@@ -28,6 +28,12 @@ user = {
   'years_list': [],
   'age': 20,
   'assets': 100000,
+  'mean_interest' = .05, 
+  'std_interest' = .1,
+  'mean_inflation' = .03, 
+  'std_inflation' = .005, 
+  'mean_raise = .04', 
+  'std_raise' = .01
 }
 
 nextEmployeeId = 4
@@ -170,6 +176,7 @@ class Finance:
             self.inf.append(np.random.normal(mean_inflation, std_inflation))
             self.years_list.append(i) #keep list of years to plot
             self.raise_rate.append(np.random.normal(mean_raise, std_raise))
+        return self.interest, self.inf, self.years_list, self.raise_rate
          
     
     #401k calculations 
@@ -290,7 +297,12 @@ class Finance:
         plt.title(("Potential Growth of", title, "over Years"))
         plt.show()
 
-
+@app.route('/simulation', methods=['GET'])
+def get_employee_by_id(id: int):
+  user_sim = Finance()
+  if employee is None:
+    return jsonify({ 'error': 'Employee does not exist'}), 404
+  return jsonify(employee)
 
 
 
