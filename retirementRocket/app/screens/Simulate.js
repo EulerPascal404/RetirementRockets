@@ -45,8 +45,7 @@ export default function Simulate({ navigation }) {
 
             <View style={[styles.circle,{marginBottom:10}]} ></View>
               
-            <View style={{height:100},{width:380}}>
-
+            <View style={{height:100, width:380}}>
             
             <ScrollView persistentScrollbar={true}
             style={styles.scrollContainer}
