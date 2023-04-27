@@ -9,7 +9,24 @@ import NewsCard from '../components/NewsCard';
 
 
 export default function News({ navigation }) {
- 
+  let url =  "exp://";
+  url = "http://10.20.16.65:19000/";
+  let getNews = (stock) => {
+    console.log(url + "news/" + stock);
+    fetch(url + "news/" + stock)
+      .then((response) => {
+        response.json()
+        console.log(response)
+      })
+      .then((responseJson) => {
+        console.log(responseJson);
+        console.log(responseJson.author);
+        return responseJson.author;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   
     return(
         <View style = {styles.container}>
@@ -29,6 +46,7 @@ export default function News({ navigation }) {
               url="https://www.cnbc.com/2023/04/26/meta-q1-23-earnings-boosted-by-chinese-retailers-buying-ads.html" 
               imageUrl="https://image.cnbcfm.com/api/v1/image/107131933-1665418142088-gettyimages-1327685522-kd1_0333_20210708121128478.jpeg?v=1682551934&w=740&h=416&ffmt=webp&vtcrop=y" 
             />  
+            <Button title="Get By Id" onPress={() => getNews("Tesla")} />
           </ScrollView>
           </View>
           
