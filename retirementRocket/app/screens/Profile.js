@@ -1,5 +1,6 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, StyleSheet, Button, View } from 'react-native';
+import { Text, TextInput, StyleSheet, useState,Button, View } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import ProfileSeparator from '../components/ProfileSeparator';
@@ -7,31 +8,44 @@ import { useAuthentication } from '../utils/hooks/useAuthentication';
 import {signOut} from 'firebase/auth'
 import {auth,db} from '../config/firebase'
 import colors from '../config/colors';
+import database from '@react-native-firebase/database';
+
 import { collection, addDoc } from "firebase/firestore";
+const user = useAuthentication;
 export default function Profile({ navigation }) {
     const [value, setValue] = React.useState({
-      age: useState(21),
-      salary: useState(100000),
-      savingsPercent: useState(10),
-      assetValue: useState(0),
-      meanInflationRate: useState(3.8),
-      stdDevInflationRate:useState(56),
-      meanInterestRate: useState(7.03),
-      stdDevInterestRate:useState(10),
-      meanRaiseRate: useState(7.08),
-      stdDevRaiseRate:useState(1.8),
-      meanTaxRate: useState(09.4),
-      stdDevTaxRate:useState(10),
+      age: 21,
+      salary: 60000,
+      savingsPercent: 10,
+      assetValue: 10,
+      meanInflationRate: 3.8,
+      stdDevInflationRate: 56,
+      meanInterestRate: 5,
+      stdDevInterestRate: 10,
+      meanRaiseRate: 5,
+      stdDevRaiseRate:1.8,
+      meanTaxRate: 5,
+      stdDevTaxRate: 10,
       //21,
     })
     const addUser= async() => {
       // creates a collection with the authenticated user's email as the UID
       try {
-        const docRef = await addDoc(collection(db, user.email), {
-          name: userName,
-          password: password,
-        });
-        console.log("Document written with ID: ", docRef.id);
+          database().ref('/items').push({
+          age: value.age,
+          salary: value.password,
+          savingsPercent: value.savingsPercent,
+          assetValue: value.assetValue,
+          meanInflationRate: value.meanInflationRate,
+          stdDevInflationRate: value.stdDevInflationRate,
+          meanInterestRate: value.meanInterestRate,
+          stdDevInterestRate: value.stdDevInterestRate,
+          meanRaiseRate: value.meanRaiseRate,
+          stdDevRaiseRate: value.stdDevRaiseRate,
+          meanTaxRate: value.meanTaxRate,
+          stdDevTaxRate: value.stdDevTaxRate,
+          });
+        //console.log("Document written with ID: ", docRef.id.toString());
       } catch (e) {
         console.error("Error adding document: ", e);
       }
@@ -59,6 +73,7 @@ export default function Profile({ navigation }) {
               <TextInput
                 style={{height: 20, width: 300, paddingLeft: 194, fontSize: 18}}
                 onChangeText={(text) => setValue({ ...value, salary: text })}
+                keyboardType='decimal-pad'
                 defaultValue = {"$60000"}
               />
           </View>
@@ -71,6 +86,7 @@ export default function Profile({ navigation }) {
               <TextInput
                 style={{height: 20, width: 300, paddingLeft: 200, fontSize: 18}}
                 onChangeText={(text) => setValue({ ...value, savingsPercent: text })}
+                keyboardType='decimal-pad'
                 defaultValue = {"5%"}
               />
           </View>
@@ -95,7 +111,8 @@ export default function Profile({ navigation }) {
             <Text style={[styles.text, {paddingLeft: 92}, {marginTop: 10}]}> Inflation Rate </Text>
               <TextInput
                 style={{height: 20, width: 300, paddingLeft: 180, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, age: text })}
+                onChangeText={(text) => setValue({ ...value, meanInflationRate: text })}
+                keyboardType='decimal-pad'
                 defaultValue = {"5%"}
               />
           </View>
@@ -107,6 +124,8 @@ export default function Profile({ navigation }) {
             <Text style={[styles.text, {paddingLeft: 90}, {marginTop: 10}]}> Interest Rate </Text>
               <TextInput
                 style={{height: 20, width: 300, paddingLeft: 184, fontSize: 18}}
+                onChangeText={(text) => setValue({ ...value, meanInterestRate: text })}
+                keyboardType='decimal-pad'
                 defaultValue = {"5%"}
               />
           </View>
@@ -118,6 +137,8 @@ export default function Profile({ navigation }) {
             <Text style={[styles.text, {paddingLeft: 73}, {marginTop: 10}]}> Raise Rate </Text>
               <TextInput
                 style={{height: 20, width: 300, paddingLeft: 201, fontSize: 18}}
+                onChangeText={(text) => setValue({ ...value, meanRaiseRate: text })}
+                keyboardType='decimal-pad'
                 defaultValue = {"5%"}
               />
           </View>
@@ -129,6 +150,8 @@ export default function Profile({ navigation }) {
             <Text style={[styles.text, {paddingLeft: 58}, {marginTop: 10}]}> Tax Rate </Text>
               <TextInput
                 style={{height: 20, width: 300, paddingLeft: 216, fontSize: 18}}
+                onChangeText={(text) => setValue({ ...value, meanTaxRate: text })}
+                keyboardType='decimal-pad'
                 defaultValue = {"5%"}
               />
           </View>
@@ -137,11 +160,17 @@ export default function Profile({ navigation }) {
           </View>
 
           <View style={styles.centerContainer}> 
+          <MyButton 
+              title='Save Changes'
+              onPress={addUser}
+              backColor={colors.purple}
+            />
             <MyButton 
               title='Sign Out'
               onPress={() => signOut(auth)}
               backColor={colors.purple}
             />
+            
           </View>
         </View>
     )
