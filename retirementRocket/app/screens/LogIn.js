@@ -36,7 +36,23 @@ export default function LogIn({ navigation }) {
       })
     }
   }
-
+  let getEmployees = () => {
+    console.log("point 1")
+    fetch("http://10.20.16.65:5000/employees")
+    .then(res => {
+      console.log(res.status);
+      console.log(res.headers);
+      return res.json();
+    })
+    .then(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  };
   return (
     <View style={styles.container}>
        <View style={styles.centerContainer}> 
@@ -45,7 +61,7 @@ export default function LogIn({ navigation }) {
           source={require('../assets/logo.png')}
         />
         </View>
-
+        <Button title="Get" onPress={getEmployees} />
       <Text style={[styles.bold, {marginTop: 30}, {paddingLeft: 40}]}> Sign In </Text>
       <Text style={[styles.gray, {paddingLeft: 42}, {paddingTop: 10}]}> Hi there! Nice to see you again. </Text>
 

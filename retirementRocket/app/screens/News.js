@@ -10,7 +10,7 @@ import NewsCard from '../components/NewsCard';
 
 export default function News({ navigation }) {
   let url =  "exp://";
-  url = "http://10.20.16.65:19000/";
+  url = "http://127.0.0.1:5000/";
   let getNews = (stock) => {
     console.log(url + "news/" + stock);
     fetch(url + "news/" + stock)
@@ -26,6 +26,22 @@ export default function News({ navigation }) {
       .catch((error) => {
         console.error(error);
       });
+  };
+    let getEmployees = () => {
+    fetch("http://127.0.0.1:5000/employees")
+    .then(res => {
+      console.log(res.status);
+      console.log(res.headers);
+      return res.json();
+    })
+    .then(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   };
   
     return(
