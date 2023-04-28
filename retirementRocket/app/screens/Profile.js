@@ -6,13 +6,16 @@ import MyButton from '../components/MyButton';
 import ProfileSeparator from '../components/ProfileSeparator';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import {signOut} from 'firebase/auth'
+import 'firebase/firestore';
 import {auth,db} from '../config/firebase'
 import colors from '../config/colors';
-import database from '@react-native-firebase/database';
+//import database from '@react-native-firebase/database';
 
 import { collection, addDoc } from "firebase/firestore";
 const user = useAuthentication;
+ 
 export default function Profile({ navigation }) {
+
     const [value, setValue] = React.useState({
       age: 21,
       salary: 60000,
@@ -28,28 +31,43 @@ export default function Profile({ navigation }) {
       stdDevTaxRate: 10,
       //21,
     })
-    const addUser= async() => {
-      // creates a collection with the authenticated user's email as the UID
-      try {
-          database().ref('/items').push({
-          age: value.age,
-          salary: value.password,
-          savingsPercent: value.savingsPercent,
-          assetValue: value.assetValue,
-          meanInflationRate: value.meanInflationRate,
-          stdDevInflationRate: value.stdDevInflationRate,
-          meanInterestRate: value.meanInterestRate,
-          stdDevInterestRate: value.stdDevInterestRate,
-          meanRaiseRate: value.meanRaiseRate,
-          stdDevRaiseRate: value.stdDevRaiseRate,
-          meanTaxRate: value.meanTaxRate,
-          stdDevTaxRate: value.stdDevTaxRate,
-          });
-        //console.log("Document written with ID: ", docRef.id.toString());
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
+    const data ={
+      age: value.age,
+      salary: value.salary,
+      savingsPercent: value.savingsPercent,
+      assetValue: value.assetValue,
+      meanInflationRate: value.meanInflationRate,
+      stdDevInflationRate: value.stdDevInflationRate,
+      meanInterestRate: value.meanInterestRate,
+      stdDevInterestRate: value.stdDevInterestRate,
+      meanRaiseRate: value.meanRaiseRate,
+      stdDevRaiseRate: value.stdDevRaiseRate,
+      meanTaxRate: value.meanTaxRate,
+      stdDevTaxRate: value.stdDevTaxRate,
+                
     }
+    // const addUser= async() => {
+    //   // creates a collection with the authenticated user's email as the UID
+    //   try {
+    //       database().ref('/items').push({
+          
+    //       });
+    //     //console.log("Document written with ID: ", docRef.id.toString());
+    //   } catch (e) {
+    //     console.error("Error adding document: ", e);
+    //   }
+    // }
+    const sendDataToFirestore = async (data) => {
+      try {
+        // Add a new document to the "collectionName" collection
+        console.log(data);
+        console.log(db);
+        await db.collection("users").add(data);
+        console.log('Data added to Firestore');
+      } catch (error) {
+        console.error("Error adding data to Firestore: ", error);
+      }
+    };
     return(
 
         <View style = {styles.container}>
@@ -162,7 +180,7 @@ export default function Profile({ navigation }) {
           <View style={styles.centerContainer}> 
           <MyButton 
               title='Save Changes'
-              onPress={addUser}
+              onPress={() => sendDataToFirestore(data)}
               backColor={colors.purple}
             />
             <MyButton 
