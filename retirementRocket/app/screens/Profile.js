@@ -57,13 +57,13 @@ export default function Profile({ navigation }) {
     //     console.error("Error adding document: ", e);
     //   }
     // }
-    const sendDataToFirestore = async (data) => {
+    const sendDataToFirestore = async (datar) => {
       try {
-        // Add a new document to the "collectionName" collection
-        console.log(data);
+        console.log(datar);
         console.log(db);
-        await db.collection("users").add(data);
-        console.log('Data added to Firestore');
+        const docRef = await addDoc(collection(db, 'users'), datar );
+    
+        console.log('Document written with ID: ', docRef.id);
       } catch (error) {
         console.error("Error adding data to Firestore: ", error);
       }
