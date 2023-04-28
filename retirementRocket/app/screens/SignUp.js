@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TextInput, StyleSheet, useState, View } from 'react-native';
 
+
 import MyButton from '../components/MyButton';
 import Separator from '../components/Separator';
 import colors from '../config/colors';
@@ -19,7 +20,8 @@ export default function SignUp({ navigation }) {
     error: ''
   })
   async function signUp() {
-    if (value.email === '' || value.password === '') {
+    if (!isChecked || value.email === '' || value.password === '') {
+      console.log("blah")
       setValue({
         ...value,
         error: 'Email and password are mandatory.'
@@ -57,6 +59,10 @@ export default function SignUp({ navigation }) {
     }
   }
 
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  
+
   return (
     <View style = {styles.container}>
       <Text style={[styles.bold, {marginTop: 100}, {paddingLeft: 40}]}> Sign Up </Text>
@@ -87,7 +93,8 @@ export default function SignUp({ navigation }) {
           unfillColor="#FFFFFF"
           iconStyle={{ borderColor: "#6334e3" }}
           innerIconStyle={{ borderWidth: 2 }}
-          //onPress={(isChecked: checked) => {true}}
+          isChecked={isChecked}
+          onPress={() => setIsChecked(!isChecked)}
         />
 
 
@@ -106,6 +113,7 @@ export default function SignUp({ navigation }) {
           title= "Continue"
           backColor={colors.purple}
           onPress={signUp}
+          disabled={!isChecked}
         />
 
       <View style = {[styles.textbuttons]}>
