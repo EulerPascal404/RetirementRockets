@@ -34,8 +34,13 @@ user = {
   'mean_inflation' : .03, 
   'std_inflation' : .005, 
   'mean_raise' : .04,
-  'std_raise' : .01
+  'std_raise' : .01,
+  'mean_ira': [],
 }
+user['age'] = 5
+@app.route('/', methods=['GET'])
+def get_sim():
+  return jsonify(user)
 
 nextEmployeeId = 4
 
@@ -308,4 +313,4 @@ def get_employee_by_id(id: int):
 
 
 # host='0.0.0.0', port=5000, debug=True
-app.run(host="10.20.16.65", port="5000")
+app.run(port="5000")
