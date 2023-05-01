@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import 'firebase/auth';
+import 'firebase/firestore';
 import {getAuth} from "firebase/auth"
 import Constants from 'expo-constants';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -15,6 +16,7 @@ const firebaseConfig = {
   storageBucket: "retirementappfinal.appspot.com",
   messagingSenderId: "161519228032",
   appId: "1:161519228032:web:0d997a299814f975424265"
+  //docID: zqA6iFEMeWSjLp5QLLxw
 };
 
 // Initialize Firebase
