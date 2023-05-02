@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, Button, TextInput, CommonActions, NavigationContainer } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, TextInput, CommonActions, NavigationContainer, ToastAndroid, Alert } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import colors from '../config/colors';
@@ -16,11 +16,14 @@ export default function LogIn({ navigation }) {
     email: '',
     password: '',
     error: ''
+
+    
   })
   async function signIn() {
     if (value.email === '' || value.password === '') {
       setValue({
         ...value,
+        showAlert,
         error: 'Email and password are mandatory.'
       })
       return;
@@ -30,6 +33,7 @@ export default function LogIn({ navigation }) {
       await signInWithEmailAndPassword(auth, value.email, value.password);
       navigation.push("HomeDrawer");
     } catch (error) {
+      showAlert
       setValue({
         ...value,
         error: error.message,
@@ -50,9 +54,22 @@ export default function LogIn({ navigation }) {
       },
       (error) => {
         console.log(error);
+        showAlert
       }
     )
   };
+
+  const showAlert = () => {
+    Alert.alert(
+      "Popup Title",
+      "This is a pop-up message!",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <View style={styles.container}>
        <View style={styles.centerContainer}> 
@@ -61,7 +78,6 @@ export default function LogIn({ navigation }) {
           source={require('../assets/logo.png')}
         />
         </View>
-        <Button title="Get" onPress={getEmployees} />
       <Text style={[styles.bold, {marginTop: 30}, {paddingLeft: 40}]}> Sign In </Text>
       <Text style={[styles.gray, {paddingLeft: 42}, {paddingTop: 10}]}> Hi there! Nice to see you again. </Text>
 
@@ -87,7 +103,7 @@ export default function LogIn({ navigation }) {
       <View style={styles.centerContainer}> 
         <MyButton 
           title='Sign In'
-          onPress={signIn}
+          //onPress={showAlert}
           backColor={colors.purple}
         />
 
@@ -96,7 +112,8 @@ export default function LogIn({ navigation }) {
 
           <MyTextButton 
               text = 'Sign Up'  
-                onPress={() => navigation.push("SignUp")}
+              //onPress={() => ToastAndroid.show("TestTestTest")}
+                onPress={showAlert}
           /> 
         </View>
       </View>
