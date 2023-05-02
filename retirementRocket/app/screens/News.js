@@ -9,107 +9,61 @@ import NewsCard from '../components/NewsCard';
 
 
 export default function News({ navigation }) {
-  let url =  "exp://";
-  url = "http://127.0.0.1:5000/";
-  let getNews = (stock) => {
-    console.log(url + "news/" + stock);
-    fetch(url + "news/" + stock)
-      .then((response) => {
-        response.json()
-        console.log(response)
-      })
-      .then((responseJson) => {
-        console.log(responseJson);
-        console.log(responseJson.author);
-        return responseJson.author;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-    let getEmployees = () => {
-    fetch("http://127.0.0.1:5000/employees")
-    .then(res => {
-      console.log(res.status);
-      console.log(res.headers);
-      return res.json();
-    })
-    .then(
-      (result) => {
-        console.log(result);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-  };
-  
-    return(
-        <View style = {styles.container}>
-          <View style = {{backgroundColor: 'white'}}>
-           <ScrollView persistentScrollbar={true}> 
+  const data = require('../../news.json');
+  const dataArray = Object.values(data);
+  const newsCards = dataArray.map((newsItem) => (
+    <NewsCard 
+      title={newsItem.title} 
+      author={newsItem.author} 
+      url={newsItem.url} 
+      imageUrl={newsItem.urlToImage} 
+    />
+  ));
 
-            <NewsCard 
-              title="Fremd student earns prestigious national chess prize" 
-              author="Madhu Krishnamurthy" 
-              url="https://www.dailyherald.com/news/20230423/fremd-student-earns-prestigious-national-chess-prize" 
-              imageUrl="https://www.dailyherald.com/storyimage/DA/20230423/NEWS/230429726/AR/0/AR-230429726.jpg&updated=202304240619&MaxW=900&maxH=900&noborder&Q=80" 
-            />
-
-            <NewsCard 
-              title="Chinese retailers helped lift Meta’s first-quarter sales in a tough online advertising market" 
-              author="Jonathan Vanian" 
-              url="https://www.cnbc.com/2023/04/26/meta-q1-23-earnings-boosted-by-chinese-retailers-buying-ads.html" 
-              imageUrl="https://image.cnbcfm.com/api/v1/image/107131933-1665418142088-gettyimages-1327685522-kd1_0333_20210708121128478.jpeg?v=1682551934&w=740&h=416&ffmt=webp&vtcrop=y" 
-            />  
-            <Button title="Get By Id" onPress={() => getNews("Tesla")} />
-          </ScrollView>
-          </View>
-          
-
-         
-        
-          
-        </View>
-    );
-
-
-
+  return (
+    <View style={styles.container}>
+      <View style={{ backgroundColor: 'white' }}>
+        <ScrollView persistentScrollbar={true}> 
+          {newsCards}
+        </ScrollView>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      width: "100%",
-      height: "100%",
-      backgroundColor: "white"
-    },
+  container: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "white"
+  },
 
-    text: {
-      color: 'black',
-      fontSize: 18,
-    },
+  text: {
+    color: 'black',
+    fontSize: 18,
+  },
 
-    row: {
-      flexDirection: 'row',
-      alignItems: 'space-between',
-      justifyContent: 'center',
-      width: "100%"
-    },
-  
-    centerContainer: {
-      width: "100%",
-      alignItems: 'center'
-    },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'space-between',
+    justifyContent: 'center',
+    width: "100%"
+  },
 
-    gray: {
-      color: '#808080',
-      fontSize: 16,
-    },
+  centerContainer: {
+    width: "100%",
+    alignItems: 'center'
+  },
 
-    lightGrayBox: {
-      width: '100%',
-      height: 30,
-      backgroundColor: 'lightgray',
-      alignItems: 'center'
-    }
-  });
+  gray: {
+    color: '#808080',
+    fontSize: 16,
+  },
+
+  lightGrayBox: {
+    width: '100%',
+    height: 30,
+    backgroundColor: 'lightgray',
+    alignItems: 'center'
+  }
+});
