@@ -7,6 +7,7 @@ import ProfileSeparator from '../components/ProfileSeparator';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import {signOut} from 'firebase/auth'
 import 'firebase/firestore';
+import {getDocs } from "firebase/firestore"; 
 import {auth,db} from '../config/firebase'
 import colors from '../config/colors';
 //import database from '@react-native-firebase/database';
@@ -33,6 +34,7 @@ export default function Profile({ navigation }) {
     })
     const data ={
       age: value.age,
+      username: user.email,
       salary: value.salary,
       savingsPercent: value.savingsPercent,
       assetValue: value.assetValue,
@@ -46,18 +48,9 @@ export default function Profile({ navigation }) {
       stdDevTaxRate: value.stdDevTaxRate,
                 
     }
-    // const addUser= async() => {
-    //   // creates a collection with the authenticated user's email as the UID
-    //   try {
-    //       database().ref('/items').push({
-          
-    //       });
-    //     //console.log("Document written with ID: ", docRef.id.toString());
-    //   } catch (e) {
-    //     console.error("Error adding document: ", e);
-    //   }
-    // }
+
     const sendDataToFirestore = async (datar) => {
+      console.log(datar);
       try {
         console.log(datar);
         console.log(db);
@@ -68,6 +61,12 @@ export default function Profile({ navigation }) {
         console.error("Error adding data to Firestore: ", error);
       }
     };
+    const getData = async() =>{
+      const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+      console.log("{doc.data()}");
+      });
+    }
     return(
 
         <View style = {styles.container}>
@@ -181,6 +180,11 @@ export default function Profile({ navigation }) {
           <MyButton 
               title='Save Changes'
               onPress={() => sendDataToFirestore(data)}
+              backColor={colors.purple}
+            />
+            <MyButton 
+              title='Get data'
+              onPress={() => getData}
               backColor={colors.purple}
             />
             <MyButton 
