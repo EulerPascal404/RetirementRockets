@@ -12,6 +12,24 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 //const auth = getAuth();
 
 export default function LogIn({ navigation }) {
+
+  num = () => 1;
+
+  showAlert = () => {
+    Alert.alert(
+      "Popup Title",
+      "This is a pop-up message!",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
+  };
+
+
+
+
+
   const [value, setValue] = React.useState({
     email: '',
     password: '',
@@ -20,26 +38,51 @@ export default function LogIn({ navigation }) {
     
   })
   async function signIn() {
+   
     if (value.email === '' || value.password === '') {
       setValue({
         ...value,
-        showAlert,
         error: 'Email and password are mandatory.'
       })
+      Alert.alert(
+        "No Email/Password Entered!",
+        "Please enter your log-in information or click 'sign-up' to get started!",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
       return;
     }
 
     try {
       await signInWithEmailAndPassword(auth, value.email, value.password);
       navigation.push("HomeDrawer");
+      num => 2;
+      showAlert;
+      
     } catch (error) {
-      showAlert
+
+      Alert.alert(
+        "No Email/Password Entered!",
+        "Please enter your log-in information or click 'sign-up' to get started!",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
+
       setValue({
         ...value,
         error: error.message,
+        
       })
     }
+    
+
+
   }
+
   let getEmployees = () => {
     console.log("point 1")
     fetch("http://10.20.16.65:5000/employees")
@@ -53,23 +96,14 @@ export default function LogIn({ navigation }) {
         console.log(result);
       },
       (error) => {
+        showAlert;
         console.log(error);
-        showAlert
+        
       }
     )
   };
 
-  const showAlert = () => {
-    Alert.alert(
-      "Popup Title",
-      "This is a pop-up message!",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ],
-      { cancelable: false }
-    );
-  };
-
+  
   return (
     <View style={styles.container}>
        <View style={styles.centerContainer}> 
@@ -103,7 +137,7 @@ export default function LogIn({ navigation }) {
       <View style={styles.centerContainer}> 
         <MyButton 
           title='Sign In'
-          //onPress={showAlert}
+          onPress={signIn}
           backColor={colors.purple}
         />
 
