@@ -58,28 +58,36 @@ export default function LogIn({ navigation }) {
     try {
       await signInWithEmailAndPassword(auth, value.email, value.password);
       navigation.push("HomeDrawer");
-      num => 2;
-      showAlert;
+    
       
     } catch (error) {
-
-      Alert.alert(
-        "No Email/Password Entered!",
-        "Please enter your log-in information or click 'sign-up' to get started!",
-        [
-          { text: "OK", onPress: () => console.log("OK Pressed") }
-        ],
-        { cancelable: false }
-      );
-
+      num = () => 2;
+      
       setValue({
         ...value,
         error: error.message,
         
       })
+
+      if(num = () => 2){
+      
+        Alert.alert(
+          "Wrong Information Entered!",
+          "Please enter your log-in information or click 'sign-up' to get started!",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+        
+      }
+      
+      num = () => 1;
+
+
+
     }
     
-
 
   }
 
