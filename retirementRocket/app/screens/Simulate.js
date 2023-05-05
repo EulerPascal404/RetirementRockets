@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TextInput, StyleSheet, Button, View, SafeAreaView, ScrollView } from 'react-native';
+import { Text, TextInput, StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
 import {
   LineChart,
   BarChart,
@@ -8,101 +8,86 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
-
+import NewsCard from '../components/NewsCard';
 
 export default function Simulate({ navigation }) {
+  // const data = require('../../news.json');
+  // const dataArray = Object.values(data);
+
+  // const newsCards = dataArray.map((newsItem) => (
+  //   <NewsCard
+  //     key={newsItem.title}
+  //     title={newsItem.title}
+  //     author={newsItem.author}
+  //     url={newsItem.url}
+  //     imageUrl={newsItem.urlToImage}
+  //   />
+  // ));
+
     return (
-          <View style={styles.container}>
+      <View style={styles.container}>
+        <ScrollView persistentScrollbar={true}>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'},{marginTop:0}]}> Overview 
-        </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 210}]}> Overview </Text>
+          <View style={[styles.circle, {marginBottom: 5}, {alignSelf: "flex-end"}]}></View>
+          <View style={{height:190}}>
+            <ProgressChart data={[0.4, 0.6, 0.8]}
+              width= {380}
+              height={190}
+              chartConfig={chartConfig}
+            />
+          </View>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 210}]}> Charts </Text>
+        <View style={[styles.circle, {marginBottom:10}, {alignSelf: "flex-end"}]} ></View>
+              
+        <View style={{ backgroundColor: 'white' }}>
+            <LineChart
+              data={data}
+              width={380}
+              height={190}
+              chartConfig={chartConfig}
+              withHorizontalLabels={true}
+              withInnerLines={false}
+              persistentScrollbar={true}
+              style={{
+                alignSelf: "center"
+              }}
+            />
 
-        
+            <LineChart
+              data={data}
+              width={380}
+              height={190}
+              chartConfig={chartConfig}
+              withHorizontalLabels={true}
+              withInnerLines={false}
+              style={{
+                alignSelf: "center"
+              }}
+            />
 
-            <View style={[styles.circle,{marginBottom: 5}]} ></View>
-            <View style={{height:190}}>
-        <ScrollView>
-        
-        
-
-        <ProgressChart data={[0.4, 0.6, 0.8]}
-        width= {380}
-        height={190}
-        chartConfig={chartConfig}
-        />
-        
-        
-        </ScrollView>
+            <LineChart
+              data={data}
+              width={380}
+              height={190}
+              chartConfig={chartConfig}
+              withHorizontalLabels={true}
+              withInnerLines={false}
+              style={{
+                alignSelf: "center"
+              }}  
+            />
         </View>
 
-            <Text style={[{fontSize: 15, fontWeight: 'bold'},{marginTop: 0}]}> Charts 
-        </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 250}]}> News </Text>
+        <View style={[styles.circle1, {alignSelf: "flex-end"}]} ></View>
 
-        
+      </ScrollView>
 
-
-
-
-            <View style={[styles.circle,{marginBottom:10}]} ></View>
-              
-            <View style={{height:100, width:380}}>
-            
-            <ScrollView persistentScrollbar={true}
-            style={styles.scrollContainer}
-            
-            >
-            <LineChart
-            
-            data={data}
-            width={380}
-            height={190}
-            chartConfig={chartConfig}
-            withHorizontalLabels={true}
-            withInnerLines={false}
-            persistentScrollbar={true}
-            style={{
-              alignSelf: "center"
-            }}
-          />
-          <LineChart
-            
-            data={data}
-            width={380}
-            height={190}
-            chartConfig={chartConfig}
-            withHorizontalLabels={true}
-            withInnerLines={false}
-            style={{
-              alignSelf: "center"
-            }}
-          />
-          <LineChart
-            
-            data={data}
-            width={380}
-            height={190}
-            chartConfig={chartConfig}
-            withHorizontalLabels={true}
-            withInnerLines={false}
-            style={{
-              alignSelf: "center"
-            }}
-          />
-
-          </ScrollView>
-          </View>
-               
-    
-            
-
-            <Text style={[{fontSize: 15, fontWeight: 'bold'},{marginTop: 0}]}> News 
-        </Text>
-
-            <View style={[styles.circle1]} ></View>
-          </View>
+     </View>
          
       );
-          
+            
 }
 const styles = StyleSheet.create({
     container: {
@@ -137,9 +122,12 @@ const styles = StyleSheet.create({
     },
     scrollContainer:{
       width:'100%',
-      height:220,
+      height:'100%',
+      alignContent: 'center',
       marginLeft: 20,
       persistentScrollbar:true,
+      backgroundColor: 'red'
+
     }
   });
 
