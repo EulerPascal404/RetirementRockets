@@ -80,9 +80,11 @@ export default function LogIn({ navigation }) {
           { cancelable: false }
         );
         
+      }else{
+        num = () => 1;
       }
       
-      num = () => 1;
+      
 
 
 
