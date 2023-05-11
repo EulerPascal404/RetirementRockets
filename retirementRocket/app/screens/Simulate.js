@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundGradientTo: "#ffffff",
     backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(99, 52, 227, ${opacity})`,
-    strokeWidth: 3, // optional, default 3
+    strokeWidth: 3, 
     barPercentage: 1,
     borderRadius:100,
     
