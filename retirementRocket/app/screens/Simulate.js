@@ -10,13 +10,15 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 import NewsCard from '../components/NewsCard';
+const userjson = require('../../user.json');
 
 export default function Simulate({ navigation }) {
   const userjson = require('../../user.json');
-  console.log(userjson);
-  console.log("STOP\n");
-  const userData = Object.values(userjson);
-  console.log(userData);
+  //console.log(userjson);
+ // console.log("STOP\nAGE:");
+  //console.log(userjson['age'])
+  //const userData = Object.values(userjson);
+  //console.log(userData);
   // const data = require('../../news.json');
   // const dataArray = Object.values(data);
 
@@ -37,44 +39,71 @@ export default function Simulate({ navigation }) {
         <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 210}]}> Overview </Text>
           <View style={[styles.circle, {marginBottom: 5}, {alignSelf: "flex-end"}]}></View>
           <View style={{height:190}}>
-            <ProgressChart data={[0.4, 0.6, 0.8]}
-              width= {380}
-              height={190}
-              chartConfig={chartConfig}
-            />
+          <PieChart
+            data={pie_final_data}
+            width={300}
+            height={220}
+            chartConfig={chartConfig}
+            accessor={"population"}
+            backgroundColor={"transparent"}
+            paddingLeft={"15"}
+            center={[10, 50]}
+            absolute
+          />
+          </View>
+          <View style={{height:190}}>
+          <PieChart
+            data={pie_final__discounted_data}
+            width={300}
+            height={220}
+            chartConfig={chartConfig}
+            accessor={"population"}
+            backgroundColor={"transparent"}
+            paddingLeft={"15"}
+            center={[10, 50]}
+            absolute
+          />
           </View>
         <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 210}]}> Charts </Text>
         <View style={[styles.circle, {marginBottom:10}, {alignSelf: "flex-end"}]} ></View>
               
         <View style={{ backgroundColor: 'white' }}>
-            <LineChart
-              data={data}
-              width={380}
-              height={190}
-              chartConfig={chartConfig}
-              withHorizontalLabels={true}
-              withInnerLines={false}
-              persistentScrollbar={true}
-              style={{
-                alignSelf: "center"
-              }}
-            />
-
-            <LineChart
-              data={data}
-              width={380}
+        <LineChart
+              data={asset_graph_data}
+              width={300}
               height={190}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
               withInnerLines={false}
               style={{
                 alignSelf: "center"
-              }}
+              }}  
             />
-
             <LineChart
-              data={data}
-              width={380}
+              data={four_graph_data}
+              width={300}
+              height={190}
+              chartConfig={chartConfig}
+              withHorizontalLabels={true}
+              withInnerLines={false}
+              style={{
+                alignSelf: "center"
+              }}  
+            />
+            <LineChart
+              data={ira_graph_data}
+              width={300}
+              height={190}
+              chartConfig={chartConfig}
+              withHorizontalLabels={true}
+              withInnerLines={false}
+              style={{
+                alignSelf: "center"
+              }}  
+            />
+            <LineChart
+              data={total_graph_data}
+              width={300}
               height={190}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
@@ -152,18 +181,100 @@ const styles = StyleSheet.create({
     
   };
 
-  // const total = {
-  //   labels: [...Array(40).keys()],
-  //   datasets: [
-  //     {
-  //       data: userData['IRA_list'][0],
-  //     },
-  //     {
-  //       data: userData['IRA_list'][1],
-  //     },
-  //   ],
-  // };
-
+  var sumArray = [];
+  for (var i = 0; i < userjson['401_list'].length; i++) {
+    var row = [];
+    for (var j = 0; j < userjson['401_list'][i].length; j++) {
+      var sum = userjson['401_list'][i][j] + userjson['IRA_list'][i][j] + userjson['asset_list'][i][j];
+      row.push(sum);
+    }
+    sumArray.push(row);
+  }
+  let totalObject = []
+  for (var i = 0; i < 15; i++) {
+    
+    totalObject.push({ data: sumArray[i]});
+  }
+  let assetObject = []
+  for (var i = 0; i < 15; i++) {
+    
+    assetObject.push({ data: userjson['asset_list'][i]});
+  }
+  let fourObject = []
+  for (var i = 0; i < 15; i++) {
+    
+    fourObject.push({ data: userjson['401_list'][i]});
+  }
+  let iraObject = []
+  for (var i = 0; i < 15; i++) {
+    
+    iraObject.push({ data: userjson['IRA_list'][i]});
+  }
+  //console.log(userjson['asset_list'].length)
+  //console.log(userjson['asset_list'][0].length)
+  //...Array(20).keys()
+  const pie_final_data = [
+    {
+      name: "401K",
+      population: parseFloat(userjson['401k_end'].toFixed(2)),
+      color: "rgba(131, 167, 234, 1)",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 10
+    },
+    {
+      name: "IRA",
+      population: parseFloat(userjson['IRA_end'].toFixed(2)),
+      color: "red",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 10
+    },
+    {
+      name: "Assets",
+      population: parseFloat(userjson['asset_end'].toFixed(2)),
+      color: "rgb(0, 0, 255)",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 10
+    },
+  ];
+  const pie_final__discounted_data = [
+    {
+      name: "401K",
+      population: parseFloat(userjson['401k_d_end'].toFixed(2)),
+      color: "rgba(131, 167, 234, 1)",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 10
+    },
+    {
+      name: "IRA",
+      population: parseFloat(userjson['Ira_d_end'].toFixed(2)),
+      color: "red",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 10
+    },
+    {
+      name: "Assets",
+      population: parseFloat(userjson['asset_d_end'].toFixed(2)),
+      color: "rgb(0, 0, 255)",
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 10
+    },
+  ];
+  const total_graph_data = {
+    labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+    datasets: totalObject,
+  };
+  const asset_graph_data = {
+    labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+    datasets: assetObject,
+  };
+  const four_graph_data = {
+    labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+    datasets: fourObject,
+  };
+  const ira_graph_data = {
+    labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+    datasets: iraObject,
+  };
   const chartConfig = {
     backgroundGradientFrom: "#ffffff",
     backgroundGradientFromOpacity: 0,
