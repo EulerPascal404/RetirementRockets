@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, TextInput, StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
+import { AppRegistry } from 'react-native';
 import {
   LineChart,
   BarChart,
