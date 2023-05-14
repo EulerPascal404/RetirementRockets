@@ -11,6 +11,8 @@ import {
 import NewsCard from '../components/NewsCard';
 
 export default function Simulate({ navigation }) {
+  const userjson = require('../../user.json');
+  const userData = Object.values(userjson);
   // const data = require('../../news.json');
   // const dataArray = Object.values(data);
 
@@ -68,6 +70,17 @@ export default function Simulate({ navigation }) {
 
             <LineChart
               data={data}
+              width={380}
+              height={190}
+              chartConfig={chartConfig}
+              withHorizontalLabels={true}
+              withInnerLines={false}
+              style={{
+                alignSelf: "center"
+              }}  
+            />
+            <LineChart
+              data={total}
               width={380}
               height={190}
               chartConfig={chartConfig}
@@ -143,6 +156,18 @@ const styles = StyleSheet.create({
     ],
     
     
+  };
+
+  const total = {
+    labels: [...Array(40).keys()],
+    datasets: [
+      {
+        data: userData['IRA_list'][0],
+      },
+      {
+        data: userData['IRA_list'][1],
+      },
+    ],
   };
 
   const chartConfig = {
