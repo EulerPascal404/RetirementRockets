@@ -47,84 +47,94 @@ export default function Simulate({ navigation }) {
         <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185}]}> Overview </Text>
           <View style={[styles.circle, {marginBottom: 5}, {alignSelf: "flex-end"}]}></View>
 
-          <View style={{height:190}}>
+          <View style={{height:300}}>
             <PieChart
               data={pie_final_data}
-              width={300}
-              height={220}
+              width={200}
+              height={250}
               chartConfig={chartConfig}
               accessor={"population"}
               backgroundColor={"transparent"}
               paddingLeft={"15"}
-              center={[10, 50]}
+              center={[10, 10]}
               absolute
+              style={{
+                alignSelf: "center"
+              }}
             />
           </View>
 
-          <View style={{height:190}}>
+          <View style={{height:300}}>
             <PieChart
               data={pie_final__discounted_data}
-              width={300}
-              height={220}
+              width={250}
+              height={200}
               chartConfig={chartConfig}
               accessor={"population"}
               backgroundColor={"transparent"}
               paddingLeft={"15"}
               center={[10, 50]}
               absolute
+              style={{
+                alignSelf: "center"
+              }}
             />
           </View>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185}]}> Charts </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185},{marginTop: 60}]}> Charts </Text>
         <View style={[styles.circle, {marginBottom: 20}, {alignSelf: "flex-end"}]} ></View>
               
-        <View style={{ backgroundColor: 'white' }}>
+        <View style={{ backgroundColor: 'white' }, {width:340}}>
             <LineChart
               data={asset_graph_data}
-              width={300}
+              width={340}
               height={190}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
               withInnerLines={false}
               style={{
-                alignSelf: "center"
+                alignSelf: "flex-end"
               }}  
+              withShadow = {false}
             />
 
             <LineChart
               data={four_graph_data}
-              width={300}
-              height={190}
+              width={340}
+              height={250}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
               withInnerLines={false}
               style={{
-                alignSelf: "center"
-              }}  
-            />
+                alignSelf: "flex-end"
+              }}
+              withShadow = {false}             
+              />
 
             <LineChart
               data={ira_graph_data}
-              width={300}
-              height={190}
+              width={340}
+              height={250}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
               withInnerLines={false}
               style={{
-                alignSelf: "center"
+                alignSelf: "flex-end"
               }}  
+              withShadow = {false}
             />
 
             <LineChart
               data={total_graph_data}
-              width={300}
-              height={190}
+              width={340}
+              height={250}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
               withInnerLines={false}
               style={{
                 alignSelf: "center"
               }}  
+              withShadow = {false}
             />
       
         </View>
@@ -307,11 +317,11 @@ const styles = StyleSheet.create({
     backgroundGradientFrom: "#ffffff",
     backgroundGradientFromOpacity: 0,
     backgroundGradientTo: "#ffffff",
-    backgroundGradientToOpacity: 0.5,
+    backgroundGradientToOpacity: 0,
     color: (opacity = 1) => `rgba(99, 52, 227, ${opacity})`,
-    strokeWidth: 3, 
+    strokeWidth: 0, 
     barPercentage: 1,
-    borderRadius:100,
+    borderRadius:50,
     
     
   };
