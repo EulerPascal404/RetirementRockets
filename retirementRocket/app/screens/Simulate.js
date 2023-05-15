@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, TextInput, StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput, StyleSheet, View, SafeAreaView, ScrollView, StyleSheetProperties } from 'react-native';
 import { AppRegistry } from 'react-native';
 import {
   LineChart,
@@ -9,13 +9,21 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+
+
 import NewsCard from '../components/NewsCard';
+
 const userjson = require('../../user.json');
 
 export default function Simulate({ navigation }) {
-  const userjson = require('../../user.json');
+  const news = require('../../news.json');
+  const newsArray = Object.values(news);
+  
+  const randomIndex = Math.floor(Math.random() * newsArray.length);
+  const randomNewsItem = newsArray[randomIndex];
+
   //console.log(userjson);
- // console.log("STOP\nAGE:");
+  // console.log("STOP\nAGE:");
   //console.log(userjson['age'])
   //const userData = Object.values(userjson);
   //console.log(userData);
@@ -36,39 +44,42 @@ export default function Simulate({ navigation }) {
       <View style={styles.container}>
         <ScrollView persistentScrollbar={true}>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 210}]}> Overview </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185}]}> Overview </Text>
           <View style={[styles.circle, {marginBottom: 5}, {alignSelf: "flex-end"}]}></View>
+
           <View style={{height:190}}>
-          <PieChart
-            data={pie_final_data}
-            width={300}
-            height={220}
-            chartConfig={chartConfig}
-            accessor={"population"}
-            backgroundColor={"transparent"}
-            paddingLeft={"15"}
-            center={[10, 50]}
-            absolute
-          />
+            <PieChart
+              data={pie_final_data}
+              width={300}
+              height={220}
+              chartConfig={chartConfig}
+              accessor={"population"}
+              backgroundColor={"transparent"}
+              paddingLeft={"15"}
+              center={[10, 50]}
+              absolute
+            />
           </View>
+
           <View style={{height:190}}>
-          <PieChart
-            data={pie_final__discounted_data}
-            width={300}
-            height={220}
-            chartConfig={chartConfig}
-            accessor={"population"}
-            backgroundColor={"transparent"}
-            paddingLeft={"15"}
-            center={[10, 50]}
-            absolute
-          />
+            <PieChart
+              data={pie_final__discounted_data}
+              width={300}
+              height={220}
+              chartConfig={chartConfig}
+              accessor={"population"}
+              backgroundColor={"transparent"}
+              paddingLeft={"15"}
+              center={[10, 50]}
+              absolute
+            />
           </View>
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 210}]}> Charts </Text>
-        <View style={[styles.circle, {marginBottom:10}, {alignSelf: "flex-end"}]} ></View>
+
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185}]}> Charts </Text>
+        <View style={[styles.circle, {marginBottom: 20}, {alignSelf: "flex-end"}]} ></View>
               
         <View style={{ backgroundColor: 'white' }}>
-        <LineChart
+            <LineChart
               data={asset_graph_data}
               width={300}
               height={190}
@@ -79,6 +90,7 @@ export default function Simulate({ navigation }) {
                 alignSelf: "center"
               }}  
             />
+
             <LineChart
               data={four_graph_data}
               width={300}
@@ -90,6 +102,7 @@ export default function Simulate({ navigation }) {
                 alignSelf: "center"
               }}  
             />
+
             <LineChart
               data={ira_graph_data}
               width={300}
@@ -101,6 +114,7 @@ export default function Simulate({ navigation }) {
                 alignSelf: "center"
               }}  
             />
+
             <LineChart
               data={total_graph_data}
               width={300}
@@ -112,11 +126,21 @@ export default function Simulate({ navigation }) {
                 alignSelf: "center"
               }}  
             />
-           
+      
         </View>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 250}]}> News </Text>
-        <View style={[styles.circle1, {alignSelf: "flex-end"}]} ></View>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 225}]}> News </Text>
+        <View style={[styles.circle1, {alignSelf: "flex-end"}, {marginBottom: 20}]} ></View>
+
+        <View style={styles.newsContainer}>
+          <NewsCard
+            key={randomNewsItem.title}
+            title={randomNewsItem.title}
+            author={randomNewsItem.author}
+            url={randomNewsItem.url}
+            imageUrl={randomNewsItem.urlToImage}
+          />
+        </View>
 
       </ScrollView>
 
@@ -128,13 +152,17 @@ export default function Simulate({ navigation }) {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: 'white',
-      flex: 1,
-      alignItems: 'flex-end', 
       //justifyContent: 'flex-start', 
       flexDirection: 'column',
       //rowGap: 180,
       padding: 20,
       marginTop: -5
+    },
+
+    newsContainer: {
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'white',
     },
     
     square: {
