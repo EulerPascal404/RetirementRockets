@@ -157,8 +157,7 @@ export default function LogIn({ navigation }) {
 
           <MyTextButton 
               text = 'Sign Up'  
-              //onPress={() => ToastAndroid.show("TestTestTest")}
-                onPress={showAlert}
+                onPress={() => navigation.push("SignUp")}
           /> 
         </View>
       </View>
