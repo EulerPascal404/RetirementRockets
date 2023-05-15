@@ -44,14 +44,14 @@ export default function Simulate({ navigation }) {
       <View style={styles.container}>
         <ScrollView persistentScrollbar={true}>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185}]}> Overview </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 215}]}> Overview </Text>
           <View style={[styles.circle, {marginBottom: 5}, {alignSelf: "flex-end"}]}></View>
 
-          <View style={{height:300}}>
+          <View style={{height:200}}>
             <PieChart
               data={pie_final_data}
-              width={200}
-              height={250}
+              width={350}
+              height={230}
               chartConfig={chartConfig}
               accessor={"population"}
               backgroundColor={"transparent"}
@@ -64,16 +64,16 @@ export default function Simulate({ navigation }) {
             />
           </View>
 
-          <View style={{height:300}}>
+          <View style={{height:200}}>
             <PieChart
               data={pie_final__discounted_data}
-              width={250}
-              height={200}
+              width={350}
+              height={230}
               chartConfig={chartConfig}
               accessor={"population"}
               backgroundColor={"transparent"}
               paddingLeft={"15"}
-              center={[10, 50]}
+              center={[10, 10]}
               absolute
               style={{
                 alignSelf: "center"
@@ -81,14 +81,14 @@ export default function Simulate({ navigation }) {
             />
           </View>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185},{marginTop: 60}]}> Charts </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 215},{marginTop: 60}]}> Charts </Text>
         <View style={[styles.circle, {marginBottom: 20}, {alignSelf: "flex-end"}]} ></View>
               
-        <View style={{ backgroundColor: 'white' }, {width:340}}>
+        <View style={ {width:400, alignSelf: "flex-end"}}>
             <LineChart
               data={asset_graph_data}
               width={340}
-              height={190}
+              height={240}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
               withInnerLines={false}
@@ -101,7 +101,7 @@ export default function Simulate({ navigation }) {
             <LineChart
               data={four_graph_data}
               width={340}
-              height={250}
+              height={240}
               chartConfig={chartConfig}
               withHorizontalLabels={true}
               withInnerLines={false}
@@ -132,14 +132,14 @@ export default function Simulate({ navigation }) {
               withHorizontalLabels={true}
               withInnerLines={false}
               style={{
-                alignSelf: "center"
+                alignSelf: "flex-end"
               }}  
               withShadow = {false}
             />
       
         </View>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 225}]}> News </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 255}]}> News </Text>
         <View style={[styles.circle1, {alignSelf: "flex-end"}, {marginBottom: 20}]} ></View>
 
         <View style={styles.newsContainer}>
