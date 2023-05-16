@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, useState, View } from 'react-native';
+import { Text, TextInput, StyleSheet, useState, View, Alert } from 'react-native';
 
 
 import MyButton from '../components/MyButton';
@@ -14,37 +14,27 @@ import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } fr
 
 //const auth = getAuth();
 export default function SignUp({ navigation }) {
+  num = () => 1;
   const [value, setValue] = React.useState({
     email: '',
     password: '',
     error: ''
   })
-  async function signUp() {
-    if (!isChecked || value.email === '' || value.password === '') {
-      console.log("blah")
-      setValue({
-        ...value,
-        error: 'Email and password are mandatory.'
-      })
-      return;
-    }
   
-    try {
-      await createUserWithEmailAndPassword(auth, value.email, value.password);
-      navigation.push("HomeDrawer");
-    } catch (error) {
-      setValue({
-        ...value,
-        error: error.message,
-      })
-    }
-  }
-  async function signIn() {
+  async function signUp() {
     if (value.email === '' || value.password === '') {
       setValue({
         ...value,
         error: 'Email and password are mandatory.'
       })
+      Alert.alert(
+        "No Email/Password Entered!",
+        "Please enter your information to get started!",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
       return;
     }
 
@@ -52,10 +42,26 @@ export default function SignUp({ navigation }) {
       await signInWithEmailAndPassword(auth, value.email, value.password);
       navigation.push("HomeDrawer");
     } catch (error) {
+      num = () => 2;
       setValue({
         ...value,
         error: error.message,
       })
+      
+      if(num = () => 2){
+      
+        Alert.alert(
+          "Invalid information entered.",
+          "Please enter a valid email and password to get started!",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+        
+      }else{
+        num = () => 1;
+      }
     }
   }
 
