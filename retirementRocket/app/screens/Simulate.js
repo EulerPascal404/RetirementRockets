@@ -22,32 +22,15 @@ export default function Simulate({ navigation }) {
   const randomIndex = Math.floor(Math.random() * newsArray.length);
   const randomNewsItem = newsArray[randomIndex];
 
-  //console.log(userjson);
-  // console.log("STOP\nAGE:");
-  //console.log(userjson['age'])
-  //const userData = Object.values(userjson);
-  //console.log(userData);
-  // const data = require('../../news.json');
-  // const dataArray = Object.values(data);
-
-  // const newsCards = dataArray.map((newsItem) => (
-  //   <NewsCard
-  //     key={newsItem.title}
-  //     title={newsItem.title}
-  //     author={newsItem.author}
-  //     url={newsItem.url}
-  //     imageUrl={newsItem.urlToImage}
-  //   />
-  // ));
-
     return (
       <View style={styles.container}>
         <ScrollView persistentScrollbar={true}>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 215}]}> Overview </Text>
-          <View style={[styles.circle, {marginBottom: 5}, {alignSelf: "flex-end"}]}></View>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185}]}> Overview </Text>
+          <View style={[styles.circle, {marginBottom: 15}, {alignSelf: "flex-end"}]}></View>
 
           <View style={{height:200}}>
+            <Text style={styles.chartTitle}>Estimated Total Assent in 20 Years</Text>
             <PieChart
               data={pie_final_data}
               width={350}
@@ -64,7 +47,8 @@ export default function Simulate({ navigation }) {
             />
           </View>
 
-          <View style={{height:200}}>
+          <View style={[{height:200}, {marginTop: 70}]}>
+            <Text style={styles.chartTitle}>Discounted for Inflation</Text>
             <PieChart
               data={pie_final__discounted_data}
               width={350}
@@ -81,10 +65,11 @@ export default function Simulate({ navigation }) {
             />
           </View>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 215},{marginTop: 60}]}> Charts </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 185},{marginTop: 60}]}> Charts </Text>
         <View style={[styles.circle, {marginBottom: 20}, {alignSelf: "flex-end"}]} ></View>
               
         <View style={ {width:400, alignSelf: "flex-end"}}>
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Asset Simulations for 20 Years</Text>
             <LineChart
               data={asset_graph_data}
               width={340}
@@ -96,8 +81,10 @@ export default function Simulate({ navigation }) {
                 alignSelf: "flex-end"
               }}  
               withShadow = {false}
+              withDots = {false}
             />
 
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>401K Simulations for 20 Years</Text>
             <LineChart
               data={four_graph_data}
               width={340}
@@ -108,9 +95,12 @@ export default function Simulate({ navigation }) {
               style={{
                 alignSelf: "flex-end"
               }}
-              withShadow = {false}             
+              withShadow = {false}     
+              withDots = {false}
+        
               />
 
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>IRA Simulations for 20 Years</Text>
             <LineChart
               data={ira_graph_data}
               width={340}
@@ -122,8 +112,11 @@ export default function Simulate({ navigation }) {
                 alignSelf: "flex-end"
               }}  
               withShadow = {false}
+              withDots = {false}
+
             />
 
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Total Portfolio Simulations for 20 Years</Text>
             <LineChart
               data={total_graph_data}
               width={340}
@@ -135,11 +128,13 @@ export default function Simulate({ navigation }) {
                 alignSelf: "flex-end"
               }}  
               withShadow = {false}
+              withDots = {false}
+
             />
       
         </View>
 
-        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 255}]}> News </Text>
+        <Text style={[{fontSize: 15, fontWeight: 'bold'}, {paddingLeft: 225}]}> News </Text>
         <View style={[styles.circle1, {alignSelf: "flex-end"}, {marginBottom: 20}]} ></View>
 
         <View style={styles.newsContainer}>
@@ -169,11 +164,18 @@ const styles = StyleSheet.create({
       marginTop: -5
     },
 
+    chartTitle: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      marginBottom: 10,
+    },
+
     newsContainer: {
       width: '100%',
       height: '100%',
       backgroundColor: 'white',
     },
+    
     
     square: {
       width: 170,
@@ -248,58 +250,60 @@ const styles = StyleSheet.create({
     
     iraObject.push({ data: userjson['IRA_list'][i]});
   }
-  //console.log(userjson['asset_list'].length)
-  //console.log(userjson['asset_list'][0].length)
-  //...Array(20).keys()
+  
+
   const pie_final_data = [
     {
       name: "401K",
       population: parseFloat(userjson['401k_end'].toFixed(2)),
-      color: "rgba(131, 167, 234, 1)",
+      color: "rgba(147, 112, 219, 0.5)",
       legendFontColor: "#7F7F7F",
       legendFontSize: 10
     },
     {
       name: "IRA",
       population: parseFloat(userjson['IRA_end'].toFixed(2)),
-      color: "red",
+      color: "rgba(186, 85, 211, 0.5)",
       legendFontColor: "#7F7F7F",
       legendFontSize: 10
     },
     {
       name: "Assets",
       population: parseFloat(userjson['asset_end'].toFixed(2)),
-      color: "rgb(0, 0, 255)",
+      color: "rgba(138, 43, 226, 0.5)",
       legendFontColor: "#7F7F7F",
       legendFontSize: 10
     },
   ];
+  
   const pie_final__discounted_data = [
     {
       name: "401K",
       population: parseFloat(userjson['401k_d_end'].toFixed(2)),
-      color: "rgba(131, 167, 234, 1)",
+      color: "rgba(147, 112, 219, 0.5)",
       legendFontColor: "#7F7F7F",
       legendFontSize: 10
     },
     {
       name: "IRA",
       population: parseFloat(userjson['Ira_d_end'].toFixed(2)),
-      color: "red",
+      color: "rgba(186, 85, 211, 0.5)",
       legendFontColor: "#7F7F7F",
       legendFontSize: 10
     },
     {
       name: "Assets",
       population: parseFloat(userjson['asset_d_end'].toFixed(2)),
-      color: "rgb(0, 0, 255)",
+      color: "rgba(138, 43, 226, 0.5)",
       legendFontColor: "#7F7F7F",
       legendFontSize: 10
     },
   ];
+
   const total_graph_data = {
     labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
     datasets: totalObject,
+
   };
   const asset_graph_data = {
     labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
@@ -313,15 +317,24 @@ const styles = StyleSheet.create({
     labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
     datasets: iraObject,
   };
+
   const chartConfig = {
     backgroundGradientFrom: "#ffffff",
     backgroundGradientFromOpacity: 0,
     backgroundGradientTo: "#ffffff",
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) => `rgba(99, 52, 227, ${opacity})`,
-    strokeWidth: 0, 
+    strokeWidth: 0,
     barPercentage: 1,
-    borderRadius:50,
-    
-    
-  };
+    borderRadius: 50,
+    // Updated color values for the purple theme
+    propsForLabels: {
+      fill: "#6A5ACD",
+      fontSize: 10,
+    },
+    propsForDots: {
+      r: "3",
+      strokeWidth: "2",
+      stroke: "#6A5ACD",
+    },
+};
