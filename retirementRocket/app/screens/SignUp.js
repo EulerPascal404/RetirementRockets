@@ -43,7 +43,13 @@ export default function SignUp({ navigation }) {
     }
 
     try {
+      await signInWithEmailAndPassword(auth, value.email, value.password);
       await createUserWithEmailAndPassword(auth, value.email, value.password);
+      navigation.push("HomeDrawer");
+    } catch (error) {
+      num = () => 2;
+    }
+  }
 
   const data = {
     email: value.email, 
