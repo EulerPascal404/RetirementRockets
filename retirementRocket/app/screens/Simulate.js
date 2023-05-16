@@ -21,6 +21,8 @@ export default function Simulate({ navigation }) {
   
   const randomIndex = Math.floor(Math.random() * newsArray.length);
   const randomNewsItem = newsArray[randomIndex];
+  const randomIndex2 = Math.floor(Math.random() * newsArray.length);
+  const randomNewsItem2 = newsArray[randomIndex2];
 
     return (
       <View style={styles.container}>
@@ -145,6 +147,13 @@ export default function Simulate({ navigation }) {
             url={randomNewsItem.url}
             imageUrl={randomNewsItem.urlToImage}
           />
+          <NewsCard
+            key={randomNewsItem2.title}
+            title={randomNewsItem2.title}
+            author={randomNewsItem2.author}
+            url={randomNewsItem2.url}
+            imageUrl={randomNewsItem2.urlToImage}
+          />
         </View>
 
       </ScrollView>
@@ -237,7 +246,18 @@ const styles = StyleSheet.create({
     
     iraObject.push({ data: userjson['IRA_list'][i]});
   }
+  iraObject.forEach(function(obj) {
+    obj.data.color = getRandomColor();
+  });
   
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
   const pie_final_data = [
     {
@@ -290,6 +310,7 @@ const styles = StyleSheet.create({
   const total_graph_data = {
     labels: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
     datasets: totalObject,
+    color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
 
   };
   const asset_graph_data = {
@@ -310,8 +331,8 @@ const styles = StyleSheet.create({
     backgroundGradientFromOpacity: 0,
     backgroundGradientTo: "#ffffff",
     backgroundGradientToOpacity: 0,
-    color: (opacity = 1) => `rgba(99, 52, 227, ${opacity})`,
-    // color: () => `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    //color: (opacity = 1) => `rgba(99, 52, 227, ${opacity})`,
+    color: () => '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'),
     strokeWidth: 0,
     barPercentage: 1,
     borderRadius: 50,
