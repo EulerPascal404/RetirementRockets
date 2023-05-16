@@ -23,12 +23,14 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
     borderRadius: 10,
+    borderWidth: 1,
     padding: 20,
     marginVertical: 10,
     marginHorizontal: 20,
     elevation: 5,
     flexDirection: 'row',
   },
+  //C
   textContainer: {
     flex: 1,
     paddingRight: 10,

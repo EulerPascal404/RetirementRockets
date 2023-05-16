@@ -170,13 +170,13 @@ employees = [
 years = 20
 IRA_Start = 0
 Four01k_Start = 0
-Salary = 300000
+Salary = 200000
 IRA_Contribution = 5000
 raise_rate = 0.10
 contribution401k = 0.30
 iters = 30
 age = 21
-assets = 100000
+assets = 150000
 s = Finance(0,0,0,0,0,0,0,0,0,0,0, 0)
 
 # Get rates for inflation, interest and raises for every year until retirement

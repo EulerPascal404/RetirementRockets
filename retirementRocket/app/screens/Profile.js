@@ -296,11 +296,6 @@ export default function Profile({ navigation }) {
               backColor={colors.purple}
             />
             <MyButton 
-              title='Get data'
-              onPress={() => getData()}
-              backColor={colors.purple}
-            />
-            <MyButton 
               title='Sign Out'
               onPress={() => signOut(auth)}
               backColor={colors.purple}
