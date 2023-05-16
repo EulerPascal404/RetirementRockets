@@ -185,7 +185,7 @@ export default function Profile({ navigation }) {
                 style={{height: 20, width: 100, paddingLeft: 78, fontSize: 18}}
                 keyboardType='decimal-pad'
                 onChangeText={(text) => setValue({ ...value, age: text })}
-                defaultValue = {"21"}
+                defaultValue = {"40"}
 
               />
           </View>
@@ -199,7 +199,7 @@ export default function Profile({ navigation }) {
                 style={{height: 20, width: 300, paddingLeft: 194, fontSize: 18}}
                 onChangeText={(text) => setValue({ ...value, salary: text })}
                 keyboardType='decimal-pad'
-                defaultValue = {"$60000"}
+                defaultValue = {"$120000"}
               />
           </View>
           <View style = {styles.centerContainer}>
@@ -212,7 +212,7 @@ export default function Profile({ navigation }) {
                 style={{height: 20, width: 300, paddingLeft: 200, fontSize: 18}}
                 onChangeText={(text) => setValue({ ...value, savingsPercent: text })}
                 keyboardType='decimal-pad'
-                defaultValue = {"5%"}
+                defaultValue = {"10%"}
               />
           </View>
           <View style = {styles.centerContainer}>
@@ -220,8 +220,13 @@ export default function Profile({ navigation }) {
           </View>
 
           <View style = {styles.row}>
-            <Text style={[styles.text, {paddingRight: 252}, {marginTop: 10}]}> Assets: </Text>
-              
+            <Text style={[styles.text, {paddingLeft: 50}, {marginTop: 10}]}> Assets: </Text>
+              <TextInput
+                style={{height: 20, width: 300, paddingLeft: 185, fontSize: 18}}
+                onChangeText={(text) => setValue({ ...value, assetValue: text })}
+                keyboardType='decimal-pad'
+                defaultValue = {"$100000"}
+              />
           </View>
           <View style = {styles.centerContainer}>
             <View style = {styles.specialSeparator}>
@@ -238,7 +243,7 @@ export default function Profile({ navigation }) {
                 style={{height: 20, width: 300, paddingLeft: 180, fontSize: 18}}
                 onChangeText={(text) => setValue({ ...value, meanInflationRate: text })}
                 keyboardType='decimal-pad'
-                defaultValue = {"5%"}
+                defaultValue = {"3%"}
               />
           </View>
           <View style = {styles.centerContainer}>
@@ -264,7 +269,7 @@ export default function Profile({ navigation }) {
                 style={{height: 20, width: 300, paddingLeft: 201, fontSize: 18}}
                 onChangeText={(text) => setValue({ ...value, meanRaiseRate: text })}
                 keyboardType='decimal-pad'
-                defaultValue = {"5%"}
+                defaultValue = {"4%"}
               />
           </View>
           <View style = {styles.centerContainer}>
@@ -277,7 +282,7 @@ export default function Profile({ navigation }) {
                 style={{height: 20, width: 300, paddingLeft: 216, fontSize: 18}}
                 onChangeText={(text) => setValue({ ...value, meanTaxRate: text })}
                 keyboardType='decimal-pad'
-                defaultValue = {"5%"}
+                defaultValue = {"30%"}
               />
           </View>
           <View style = {styles.centerContainer}>
@@ -312,6 +317,8 @@ export default function Profile({ navigation }) {
 const styles = StyleSheet.create({
     container: {
       width: "100%",
+      height: "100%",
+      backgroundColor: "white"
     },
 
     text: {
