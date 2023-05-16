@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import 'firebase/auth';
-import 'firebase/firestore';
+//import 'firebase/auth';
+//import 'firebase/firestore';
 import {getAuth} from "firebase/auth"
 import Constants from 'expo-constants';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -22,4 +22,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-export const auth = getAuth(app);
+//export const auth = getAuth(app);
+export const auth = getAuth();
