@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, useState, View } from 'react-native';
+import { Text, TextInput, StyleSheet, useState, View, Alert } from 'react-native';
 
 
 import MyButton from '../components/MyButton';
@@ -16,11 +16,35 @@ import { collection, addDoc } from "firebase/firestore";
 
 //const auth = getAuth();
 export default function SignUp({ navigation }) {
+  num = () => 1;
+
   const [value, setValue] = React.useState({
     email: '',
     password: '',
     error: ''
   })
+
+  
+  async function signUp() {
+    if (value.email === '' || value.password === '') {
+      setValue({
+        ...value,
+        error: 'Email and password are mandatory.'
+      })
+      Alert.alert(
+        "No Email/Password Entered!",
+        "Please enter your information to get started!",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, value.email, value.password);
+
   const data = {
     email: value.email, 
     pswd: value.password,
@@ -64,12 +88,29 @@ export default function SignUp({ navigation }) {
       } catch (error) {
         console.error("Error adding data to Firestore: ", error);
       }
+
       navigation.push("HomeDrawer");
     } catch (error) {
+      num = () => 2;
       setValue({
         ...value,
         error: error.message,
       })
+      
+      if(num = () => 2){
+      
+        Alert.alert(
+          "Invalid information entered.",
+          "Please enter a valid email and password to get started!",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+        
+      }else{
+        num = () => 1;
+      }
     }
   }
   
