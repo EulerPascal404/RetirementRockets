@@ -30,7 +30,7 @@ export default function Simulate({ navigation }) {
           <View style={[styles.circle, {marginBottom: 15}, {alignSelf: "flex-end"}]}></View>
 
           <View style={{height:200}}>
-            <Text style={styles.chartTitle}>Estimated Total Assent in 20 Years</Text>
+            <Text style={styles.chartTitle}>Estimated Total Portfolio Breakdown</Text>
             <PieChart
               data={pie_final_data}
               width={350}
@@ -48,7 +48,7 @@ export default function Simulate({ navigation }) {
           </View>
 
           <View style={[{height:200}, {marginTop: 70}]}>
-            <Text style={styles.chartTitle}>Discounted for Inflation</Text>
+            <Text style={styles.chartTitle}>Estimated Total Portfolio Breakdown(Discounted for Inflation)</Text>
             <PieChart
               data={pie_final__discounted_data}
               width={350}
@@ -69,7 +69,7 @@ export default function Simulate({ navigation }) {
         <View style={[styles.circle, {marginBottom: 20}, {alignSelf: "flex-end"}]} ></View>
               
         <View style={ {width:400, alignSelf: "flex-end"}}>
-            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Asset Simulations for 20 Years</Text>
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Projected Assets Simulation</Text>
             <LineChart
               data={asset_graph_data}
               width={340}
@@ -84,7 +84,7 @@ export default function Simulate({ navigation }) {
               withDots = {false}
             />
 
-            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>401K Simulations for 20 Years</Text>
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Projected 401K Simulation</Text>
             <LineChart
               data={four_graph_data}
               width={340}
@@ -100,7 +100,7 @@ export default function Simulate({ navigation }) {
         
               />
 
-            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>IRA Simulations for 20 Years</Text>
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Projected IRA Simulation</Text>
             <LineChart
               data={ira_graph_data}
               width={340}
@@ -116,7 +116,7 @@ export default function Simulate({ navigation }) {
 
             />
 
-            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Total Portfolio Simulations for 20 Years</Text>
+            <Text style={[styles.chartTitle, {paddingLeft: 52}]}>Projected Total Portfolio Simulation</Text>
             <LineChart
               data={total_graph_data}
               width={340}
