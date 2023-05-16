@@ -15,6 +15,7 @@ import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } fr
 //const auth = getAuth();
 export default function SignUp({ navigation }) {
   num = () => 1;
+
   const [value, setValue] = React.useState({
     email: '',
     password: '',
@@ -39,7 +40,7 @@ export default function SignUp({ navigation }) {
     }
 
     try {
-      await signInWithEmailAndPassword(auth, value.email, value.password);
+      await createUserWithEmailAndPassword(auth, value.email, value.password);
       navigation.push("HomeDrawer");
     } catch (error) {
       num = () => 2;
