@@ -207,19 +207,6 @@ const styles = StyleSheet.create({
     }
   });
 
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        data: [20, 45, 28, 80, 99, 43],
-      },
-      {
-        data: [10, 45, 30, 22, 55, 80],
-      },
-    ],
-    
-    
-  };
 
   var sumArray = [];
   for (var i = 0; i < userjson['401_list'].length; i++) {
@@ -324,10 +311,10 @@ const styles = StyleSheet.create({
     backgroundGradientTo: "#ffffff",
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) => `rgba(99, 52, 227, ${opacity})`,
+    // color: () => `#${Math.floor(Math.random() * 16777215).toString(16)}`,
     strokeWidth: 0,
     barPercentage: 1,
     borderRadius: 50,
-    // Updated color values for the purple theme
     propsForLabels: {
       fill: "#6A5ACD",
       fontSize: 10,
