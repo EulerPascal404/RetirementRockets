@@ -8,8 +8,10 @@ import colors from '../config/colors';
 import MyTextButton from '../components/MyTextButton';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import '../config/firebase';
-import {auth} from '../config/firebase'
+import {auth,db} from '../config/firebase'
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
+import { collection, addDoc } from "firebase/firestore";
+
 
 
 //const auth = getAuth();
@@ -19,6 +21,25 @@ export default function SignUp({ navigation }) {
     password: '',
     error: ''
   })
+  const data = {
+    email: value.email, 
+    pswd: value.password,
+  }
+  const datas ={
+    age: 40,
+    salary: 120000,
+    savingsPercent: 10,
+    assetValue: 100000,
+    meanInflationRate: 3,
+    stdDevInflationRate: 0.5,
+    meanInterestRate: 5,
+    stdDevInterestRate: 10,
+    meanRaiseRate: 4,
+    stdDevRaiseRate: 1,
+    meanTaxRate: 30,
+    stdDevTaxRate: 25,
+              
+  }
   async function signUp() {
     if (!isChecked || value.email === '' || value.password === '') {
       console.log("blah")
@@ -31,25 +52,18 @@ export default function SignUp({ navigation }) {
   
     try {
       await createUserWithEmailAndPassword(auth, value.email, value.password);
-      navigation.push("HomeDrawer");
-    } catch (error) {
-      setValue({
-        ...value,
-        error: error.message,
-      })
-    }
-  }
-  async function signIn() {
-    if (value.email === '' || value.password === '') {
-      setValue({
-        ...value,
-        error: 'Email and password are mandatory.'
-      })
-      return;
-    }
+      try {
+        console.log(db);
+        const docRef = await addDoc(collection(db, 'users2'), data );
+    
+        console.log('Document written with ID: ', docRef.id);
+        const subcollectionRef = collection(collection(db, 'users2'), docRef.id, 'userData');
+        const subDocRef = await addDoc(subcollectionRef, datas );
+        console.log('Document written with ID: ', subDocRef.id);
 
-    try {
-      await signInWithEmailAndPassword(auth, value.email, value.password);
+      } catch (error) {
+        console.error("Error adding data to Firestore: ", error);
+      }
       navigation.push("HomeDrawer");
     } catch (error) {
       setValue({
@@ -58,6 +72,8 @@ export default function SignUp({ navigation }) {
       })
     }
   }
+  
+
 
   const [isChecked, setIsChecked] = React.useState(false);
 
@@ -73,6 +89,7 @@ export default function SignUp({ navigation }) {
         <TextInput
             style={{height: 40}}
             placeholder="Your email adress"
+            autoCapitalize="none"
             onChangeText={(text) => setValue({ ...value, email: text })}
         />
         <Separator/>

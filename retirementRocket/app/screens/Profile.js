@@ -1,21 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, StyleSheet, useState,Button, View } from 'react-native';
+import { Text, TextInput, StyleSheet,Button, View } from 'react-native';
 
 import MyButton from '../components/MyButton';
 import ProfileSeparator from '../components/ProfileSeparator';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import {signOut} from 'firebase/auth'
 import 'firebase/firestore';
+import {getDocs, doc, updateDoc} from "firebase/firestore"; 
+
 import {auth,db} from '../config/firebase'
 import colors from '../config/colors';
 //import database from '@react-native-firebase/database';
 
 import { collection, addDoc } from "firebase/firestore";
-const user = useAuthentication;
+
  
 export default function Profile({ navigation }) {
-
+    const { user } = useAuthentication();
+    let maindocID = 0;
+    let nestdocID = 0;
+    React.useEffect(() => {
+      console.log(data);
+    }, [data]);
     const [value, setValue] = React.useState({
       age: 21,
       salary: 60000,
@@ -31,7 +38,9 @@ export default function Profile({ navigation }) {
       stdDevTaxRate: 10,
       //21,
     })
-    const data ={
+    const [data, setData] = React.useState([]);
+
+    const datas ={
       age: value.age,
       salary: value.salary,
       savingsPercent: value.savingsPercent,
@@ -43,31 +52,129 @@ export default function Profile({ navigation }) {
       meanRaiseRate: value.meanRaiseRate,
       stdDevRaiseRate: value.stdDevRaiseRate,
       meanTaxRate: value.meanTaxRate,
-      stdDevTaxRate: value.stdDevTaxRate,
-                
+      stdDevTaxRate: value.stdDevTaxRate,        
     }
-    // const addUser= async() => {
-    //   // creates a collection with the authenticated user's email as the UID
-    //   try {
-    //       database().ref('/items').push({
-          
-    //       });
-    //     //console.log("Document written with ID: ", docRef.id.toString());
-    //   } catch (e) {
-    //     console.error("Error adding document: ", e);
-    //   }
-    // }
+    const initialValues ={
+      iage: 0,
+      isalary:0 ,
+      isavingsPercent:0 ,
+      iassetValue: 0,
+      imeanInflationRate: 0,
+      istdDevInflationRate:0,
+      imeanInterestRate:0,
+      istdDevInterestRate:0,
+      imeanRaiseRate:0,
+      istdDevRaiseRate:0,
+      imeanTaxRate:0,
+      istdDevTaxRate:0,          
+    }
+
     const sendDataToFirestore = async (datar) => {
-      try {
-        console.log(datar);
-        console.log(db);
-        const docRef = await addDoc(collection(db, 'users'), datar );
+      console.log(datar);
+      
+      // Wait for the getData() function to complete
+      await getData();
     
-        console.log('Document written with ID: ', docRef.id);
-      } catch (error) {
-        console.error("Error adding data to Firestore: ", error);
+      console.log(maindocID);
+      console.log(nestdocID);
+    
+      // Check if the document IDs are not empty or undefined
+      if (maindocID && nestdocID) {
+        const parentDocRef = doc(db, 'users2', maindocID);
+        const nestedCollectionRef = collection(parentDocRef, 'userData');
+        const nestedDocRef = doc(nestedCollectionRef, nestdocID);
+        await updateDoc(nestedDocRef, datar);
+      } else {
+        console.log('Document IDs are empty or undefined');
       }
     };
+    
+    const getData = async() =>{
+      console.log(db);
+      console.log(user.email);
+      try {
+        const querySnapshot = await getDocs(collection(db, 'users2'));
+        fetchData(querySnapshot);
+        
+
+        //console.log(documents);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    const fetchData = async(querySnapshot) =>{
+      for (const doc of querySnapshot.docs) {
+        // this gets each document's individual data
+        const docData = doc.data();
+    
+        // check that it is not null
+        console.log('DocID:', doc.id);
+        console.log('Doc data:', docData);
+    
+        console.log(docData.email === user.email);
+        if (docData.email === user.email) {
+          // Get a reference to the nested collection
+          const nestedCollectionRef = collection(db, 'users2', doc.id, 'userData');
+          maindocID= doc.id;
+          // Query the nested collection for documents
+          const querySnapshot2 = await getDocs(nestedCollectionRef);
+          console.log(querySnapshot2);
+          querySnapshot2.forEach((doc) => {
+            const docIDl = doc.id;
+            nestdocID= docIDl;
+            console.log("Nested DOc ID: "+ nestdocID);
+          });        
+          const documents = querySnapshot2.docs.map((doc) => doc.data());
+          console.log(documents);
+
+          const numericalData = [];
+
+          documents.forEach((item) => {
+            // Assuming 'item' is an object with numerical and non-numerical properties
+            const itemKeys = Object.keys(item);
+            
+            // Iterate over the keys in the order they appear in the object
+            itemKeys.forEach((key) => {
+              // Check if the value is a number
+              if (typeof item[key] === 'number') {
+                // Add the numerical value to the array
+                numericalData.push(item[key]);
+                
+              }
+            });
+          });
+        // Now the 'numericalData' array contains only the numerical values extracted from the Firestore data
+        console.log(numericalData);
+      //   iage: 0,
+      // isalary:0 ,
+      // isavingsPercent:0 ,
+      // iassetValue: 0,
+      // imeanInflationRate: 0,
+      // istdDevInflationRate:0,
+      // imeanInterestRate:0,
+      // istdDevInterestRate:0,
+      // imeanRaiseRate:0,
+      // istdDevRaiseRate:0,
+      // imeanTaxRate:0,
+      // istdDevTaxRate:0, 
+        initialValues.iage = numericalData[0];
+        initialValues.isalary = numericalData[1];
+        initialValues.isavingsPercent = numericalData[2];
+        initialValues.iassetValue = numericalData[3];
+        initialValues.imeanInflationRate = numericalData[4];
+        initialValues.istdDevInflationRate = numericalData[5];
+        initialValues.imeanInterestRate = numericalData[6];
+        initialValues.istdDevInterestRate = numericalData[7];
+        initialValues.imeanRaiseRate = numericalData[8];
+        initialValues.istdDevRaiseRate = numericalData[9];
+        initialValues.imeanTaxRate = numericalData[10];
+        initialValues.istdDevTaxRate = numericalData[11];
+        console.log(initialValues);
+        }
+      }
+    }
+
     return(
 
         <View style = {styles.container}>
@@ -180,7 +287,12 @@ export default function Profile({ navigation }) {
           <View style={styles.centerContainer}> 
           <MyButton 
               title='Save Changes'
-              onPress={() => sendDataToFirestore(data)}
+              onPress={() => sendDataToFirestore(datas)}
+              backColor={colors.purple}
+            />
+            <MyButton 
+              title='Get data'
+              onPress={() => getData()}
               backColor={colors.purple}
             />
             <MyButton 
