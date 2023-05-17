@@ -192,28 +192,16 @@ export default function Profile({ navigation }) {
 
         <View style = {styles.container}>
 
-          {/* <View style = {styles.row}>
-            <Text style={[styles.text, {paddingRight: 176}, {marginTop: 20}]}> Age: </Text>
-              <TextInput
-                style={{height: 20, width: 100, paddingLeft: 78, fontSize: 18}}
-                keyboardType='decimal-pad'
-                onChangeText={(text) => setValue({ ...value, age: text })}
-                defaultValue = {"40"}
-
-              />
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View> */}
+        
           <ProfileCard
             onChangeText={(text) => setValue({ ...value, age: text })}
             keyboardType='decimal-pad'
             defaultValue="40"
             paddingLeft1={0}
-            paddingRight={195}
+            paddingRight={180}
             marginTop={20}
             width={100}
-            paddingLeft2={78}
+            paddingLeft2={75}
             label="Age"
             />
 
@@ -222,11 +210,11 @@ export default function Profile({ navigation }) {
             onChangeText={(text) => setValue({ ...value, salary: text })}
             keyboardType='decimal-pad'
             defaultValue="120000"
-            paddingLeft1={42}
+            paddingLeft1={60}
             paddingRight={0}
             marginTop={10}
             width={300}
-            paddingLeft2={194}
+            paddingLeft2={175}
             label="Salary($)"
             />
 
@@ -235,7 +223,7 @@ export default function Profile({ navigation }) {
             onChangeText={(text) => setValue({ ...value, savingsPercent: text })}
             keyboardType='decimal-pad'
             defaultValue="10"
-            paddingLeft1={72}
+            paddingLeft1={80}
             paddingRight={0}
             marginTop={10}
             width={300}
@@ -248,11 +236,11 @@ export default function Profile({ navigation }) {
             onChangeText={(text) => setValue({ ...value, assetValue: text })}
             keyboardType='decimal-pad'
             defaultValue="100000"
-            paddingLeft1={50}
+            paddingLeft1={70}
             paddingRight={0}
             marginTop={10}
             width={300}
-            paddingLeft2={185}
+            paddingLeft2={170}
             label="Assets($)"
             />
           <View style = {styles.centerContainer}>
@@ -269,11 +257,11 @@ export default function Profile({ navigation }) {
             onChangeText={(text) => setValue({ ...value, meanInflationRate: text })}
             keyboardType='decimal-pad'
             defaultValue="3"
-            paddingLeft1={100}
+            paddingLeft1={125}
             paddingRight={0}
             marginTop={10}
             width={300}
-            paddingLeft2={180}
+            paddingLeft2={160}
             label="Inflation Rate(%)"
             />
 
@@ -282,11 +270,11 @@ export default function Profile({ navigation }) {
             onChangeText={(text) => setValue({ ...value, meanInterestRate: text })}
             keyboardType='decimal-pad'
             defaultValue="5"
-            paddingLeft1={90}
+            paddingLeft1={120}
             paddingRight={0}
             marginTop={10}
             width={300}
-            paddingLeft2={184}
+            paddingLeft2={165}
             label="Interest Rate(%)"
             />
 
@@ -295,11 +283,11 @@ export default function Profile({ navigation }) {
             onChangeText={(text) => setValue({ ...value, meanRaiseRate: text })}
             keyboardType='decimal-pad'
             defaultValue="4"
-            paddingLeft1={73}
+            paddingLeft1={100}
             paddingRight={0}
             marginTop={10}
             width={300}
-            paddingLeft2={201}
+            paddingLeft2={183}
             label="Raise Rate(%)"
             />
 
@@ -308,15 +296,15 @@ export default function Profile({ navigation }) {
             onChangeText={(text) => setValue({ ...value, meanTaxRate: text })}
             keyboardType='decimal-pad'
             defaultValue="30"
-            paddingLeft1={58}
+            paddingLeft1={84}
             paddingRight={0}
             marginTop={10}
             width={300}
-            paddingLeft2={216}
+            paddingLeft2={190}
             label="Tax Rate(%)"
             />
 
-          <View style={styles.centerContainer}> 
+          <View style={[styles.centerContainer, {marginTop: 20}]}> 
           <MyButton 
               title='Save Changes'
               onPress={() => sendDataToFirestore(datas)}
