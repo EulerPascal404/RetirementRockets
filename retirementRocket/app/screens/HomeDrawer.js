@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Text, View, BackHandler } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Text, View, Image } from 'react-native';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
@@ -14,9 +14,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Drawer = createDrawerNavigator();
 
+const CustomDrawerContent = (props) => {
+  return (
+    <DrawerContentScrollView {...props}>
+      <Image source={require('../assets/logo.png')} style={{ width: '100%', height: '100%' }} />
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+};
+
 export default function App() {
   return (
       <Drawer.Navigator
+        drawerContent={CustomDrawerContent}
         screenOptions={({ route }) => ({
           drawerIcon: ({ focused, color, size }) => {
             let iconName;

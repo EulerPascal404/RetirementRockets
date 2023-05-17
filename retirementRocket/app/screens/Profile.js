@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, TextInput, StyleSheet,Button, View } from 'react-native';
-
+import ProfileCard from '../components/ProfileCard';
 import MyButton from '../components/MyButton';
 import ProfileSeparator from '../components/ProfileSeparator';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
@@ -68,6 +68,18 @@ export default function Profile({ navigation }) {
       imeanTaxRate:0,
       istdDevTaxRate:0,          
     }
+    const handleSignOut = () => {
+      auth.signOut()
+      .then(() => {
+        // Sign out successful
+        console.log('User signed out successfully');
+        navigation.push("LogIn");
+      })
+      .catch((error) => {
+        // Handle sign out error
+        console.error('Sign out error:', error);
+      });
+  };
 
     const sendDataToFirestore = async (datar) => {
       console.log(datar);
@@ -179,7 +191,7 @@ export default function Profile({ navigation }) {
 
         <View style = {styles.container}>
 
-          <View style = {styles.row}>
+          {/* <View style = {styles.row}>
             <Text style={[styles.text, {paddingRight: 176}, {marginTop: 20}]}> Age: </Text>
               <TextInput
                 style={{height: 20, width: 100, paddingLeft: 78, fontSize: 18}}
@@ -191,43 +203,58 @@ export default function Profile({ navigation }) {
           </View>
           <View style = {styles.centerContainer}>
             <ProfileSeparator/>
-          </View>
+          </View> */}
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, age: text })}
+            keyboardType='decimal-pad'
+            defaultValue="40"
+            paddingLeft1={0}
+            paddingRight={195}
+            marginTop={20}
+            width={100}
+            paddingLeft2={78}
+            label="Age"
+            />
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingLeft: 42}, {marginTop: 10}]}> Salary: </Text>
-              <TextInput
-                style={{height: 20, width: 300, paddingLeft: 194, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, salary: text })}
-                keyboardType='decimal-pad'
-                defaultValue = {"$120000"}
-              />
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
+          
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, salary: text })}
+            keyboardType='decimal-pad'
+            defaultValue="120000"
+            paddingLeft1={42}
+            paddingRight={0}
+            marginTop={10}
+            width={300}
+            paddingLeft2={194}
+            label="Salary($)"
+            />
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingLeft: 72}, {marginTop: 10}]}> Savings %: </Text>
-              <TextInput
-                style={{height: 20, width: 300, paddingLeft: 200, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, savingsPercent: text })}
-                keyboardType='decimal-pad'
-                defaultValue = {"10%"}
-              />
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingLeft: 50}, {marginTop: 10}]}> Assets: </Text>
-              <TextInput
-                style={{height: 20, width: 300, paddingLeft: 185, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, assetValue: text })}
-                keyboardType='decimal-pad'
-                defaultValue = {"$100000"}
-              />
-          </View>
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, savingsPercent: text })}
+            keyboardType='decimal-pad'
+            defaultValue="10"
+            paddingLeft1={72}
+            paddingRight={0}
+            marginTop={10}
+            width={300}
+            paddingLeft2={200}
+            label="Savings(%)"
+            />
+
+
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, assetValue: text })}
+            keyboardType='decimal-pad'
+            defaultValue="100000"
+            paddingLeft1={50}
+            paddingRight={0}
+            marginTop={10}
+            width={300}
+            paddingLeft2={185}
+            label="Assets($)"
+            />
+          
           <View style = {styles.centerContainer}>
             <View style = {styles.specialSeparator}>
             </View>
@@ -237,57 +264,57 @@ export default function Profile({ navigation }) {
             <Text style={[styles.gray, {paddingTop: 3}]}> Advanced Settings </Text>
           </View>
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingLeft: 92}, {marginTop: 10}]}> Inflation Rate </Text>
-              <TextInput
-                style={{height: 20, width: 300, paddingLeft: 180, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, meanInflationRate: text })}
-                keyboardType='decimal-pad'
-                defaultValue = {"3%"}
-              />
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
+          
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, meanInflationRate: text })}
+            keyboardType='decimal-pad'
+            defaultValue="3"
+            paddingLeft1={100}
+            paddingRight={0}
+            marginTop={10}
+            width={300}
+            paddingLeft2={180}
+            label="Inflation Rate(%)"
+            />
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingLeft: 90}, {marginTop: 10}]}> Interest Rate </Text>
-              <TextInput
-                style={{height: 20, width: 300, paddingLeft: 184, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, meanInterestRate: text })}
-                keyboardType='decimal-pad'
-                defaultValue = {"5%"}
-              />
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
+          
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, meanInterestRate: text })}
+            keyboardType='decimal-pad'
+            defaultValue="5"
+            paddingLeft1={90}
+            paddingRight={0}
+            marginTop={10}
+            width={300}
+            paddingLeft2={184}
+            label="Interest Rate(%)"
+            />
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingLeft: 73}, {marginTop: 10}]}> Raise Rate </Text>
-              <TextInput
-                style={{height: 20, width: 300, paddingLeft: 201, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, meanRaiseRate: text })}
-                keyboardType='decimal-pad'
-                defaultValue = {"4%"}
-              />
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
+         
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, meanRaiseRate: text })}
+            keyboardType='decimal-pad'
+            defaultValue="4"
+            paddingLeft1={73}
+            paddingRight={0}
+            marginTop={10}
+            width={300}
+            paddingLeft2={201}
+            label="Raise Rate(%)"
+            />
 
-          <View style = {styles.row}>
-            <Text style={[styles.text, {paddingLeft: 58}, {marginTop: 10}]}> Tax Rate </Text>
-              <TextInput
-                style={{height: 20, width: 300, paddingLeft: 216, fontSize: 18}}
-                onChangeText={(text) => setValue({ ...value, meanTaxRate: text })}
-                keyboardType='decimal-pad'
-                defaultValue = {"30%"}
-              />
-          </View>
-          <View style = {styles.centerContainer}>
-            <ProfileSeparator/>
-          </View>
+          
+          <ProfileCard
+            onChangeText={(text) => setValue({ ...value, meanTaxRate: text })}
+            keyboardType='decimal-pad'
+            defaultValue="30"
+            paddingLeft1={58}
+            paddingRight={0}
+            marginTop={10}
+            width={300}
+            paddingLeft2={216}
+            label="Tax Rate(%)"
+            />
 
           <View style={styles.centerContainer}> 
           <MyButton 
@@ -297,7 +324,7 @@ export default function Profile({ navigation }) {
             />
             <MyButton 
               title='Sign Out'
-              onPress={() => signOut(auth)}
+              onPress={() => handleSignOut()}
               backColor={colors.purple}
             />
             
