@@ -117,6 +117,7 @@ export default function Profile({ navigation }) {
 
     const fetchData = async(querySnapshot) =>{
       for (const doc of querySnapshot.docs) {
+        // for of loop iterating rhough query
         // this gets each document's individual data
         const docData = doc.data();
     
@@ -254,7 +255,6 @@ export default function Profile({ navigation }) {
             paddingLeft2={185}
             label="Assets($)"
             />
-          
           <View style = {styles.centerContainer}>
             <View style = {styles.specialSeparator}>
             </View>
@@ -327,7 +327,7 @@ export default function Profile({ navigation }) {
               onPress={() => handleSignOut()}
               backColor={colors.purple}
             />
-            
+
           </View>
         </View>
     )
